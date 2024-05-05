@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Button, View, Text, ScrollView } from 'react-native';
 import NaverLogin from '@react-native-seoul/naver-login';
+import { useNavigation } from '@react-navigation/native';
 
 const consumerKey = 'bPklbFZr9oDS49tlE6NP';
 const consumerSecret = '9UF9PHRqKf';
@@ -8,6 +9,7 @@ const appName = 'able';
 const serviceUrlScheme = 'navertest';
 
 const NaverLoginComponent = () => {
+  const navigation = useNavigation();
   const [success, setSuccessResponse] = useState();
   const [failure, setFailureResponse] = useState();
   const [getProfileRes, setGetProfileRes] = useState();
@@ -22,6 +24,10 @@ const NaverLoginComponent = () => {
       });
       setSuccessResponse(successResponse);
       setFailureResponse(failureResponse);
+      // 네이버 로그인 성공 시 OrderScreen.js로 이동
+      if (successResponse) {
+        navigation.navigate('OrderScreen');
+      }
     } catch (error) {
       console.error(error);
     }
