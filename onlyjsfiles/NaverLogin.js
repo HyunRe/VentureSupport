@@ -26,7 +26,7 @@ const NaverLoginComponent = () => {
       setFailureResponse(failureResponse);
       // 네이버 로그인 성공 시 OrderScreen.js로 이동
       if (successResponse) {
-        navigation.navigate('OrderScreen');
+        //navigation.navigate('OrderScreen');
       }
     } catch (error) {
       console.error(error);
