@@ -1,15 +1,13 @@
 import React from 'react';
 import { View, Text, TextInput, ScrollView, Button, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-
-
+//import { useNavigation } from '@react-navigation/native';
 
 const SignUpScreen = () => {
 
   const handleConfirmButtonPress = () => {
     // 로그인 페이지로 이동
-    navigation.navigate('Login');
+    //navigation.navigate('Login');
+    console.log('로그인 페이지로 이동 또는 뒤로 가기');
   };
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -62,7 +60,7 @@ const SignUpScreen = () => {
         title="확인"
         onPress={handleConfirmButtonPress}
         style={styles.confirmButton}
-        color="blue"
+        color="lightblue"
       />
     </ScrollView>
   );
