@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, Button } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, Button } from 'react-native';
 //import NaverLoginComponent from './logins/naver_login';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,6 +16,8 @@ const LoginScreen = ({ navigation }) => {
   // 이메일과 비밀번호를 관리하기 위한 상태 변수들입니다.
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
   // 로그인 시 발생하는 에러를 관리하기 위한 상태 변수입니다.
   const [loginError, setLoginError] = useState('');
@@ -18,36 +27,43 @@ const LoginScreen = ({ navigation }) => {
 
   // 로그인 버튼을 눌렀을 때 실행되는 함수입니다.
   const handleLogin = async () => {
-    const url = 'http://192.168.219.100:8080/login';
+    const url = 'http://223.194.157.56:8080/login';
 
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
+          Accept: 'application/json',
           'Content-Type': 'application/json',
+          credentials: "include",
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ //body 내 정보를 JSON 문자열로 변환
           email: email,
           password: password,
         }),
       });
 
-      if (!response.ok) {
+      if (!response.ok) { //이상 감지할 시
         throw new Error('Network response was not ok');
+        JSON.parse(response)
       }
 
-      const data = await response.json();
+      {/*서버로부터 응답 데이터를 수신받는 함수: 서버는 문자열 형식으로 반환하기 때문에 데이터타입은 반드시 text로*/}
+      const data = await response.text(); //response.text()는 반드시.
+      
       console.log('Login response:', data);
 
       // 서버로부터 받은 응답을 처리합니다.
       if (data.success !== undefined) {
+        console.log('Success response:', data);
         // 성공적인 응답 처리
       } else {
-        // 실패 응답 처리
+        setLoginError('이메일 또는 비밀번호가 올바르지 않습니다.');
       }
     } catch (error) {
       // 로그인 과정에서 발생한 에러를 처리합니다.
       console.error('Login error:', error);
+      setLoginError('로그인 중 오류가 발생했습니다.');
     }
   };
 
@@ -71,6 +87,7 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
         placeholder="Password"
+        autoCapitalize="none"
         secureTextEntry
       />
       {/* 로그인 버튼입니다. */}
@@ -94,7 +111,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 34,
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -107,6 +124,10 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
   },
+  button: {
+    marginVertical: 20, // 버튼 위아래 간격
+    width: '100%', // 버튼 너비 전체로
+  },
   forgotPassword: {
     marginVertical: 20,
     color: 'blue', // 변경 가능
@@ -118,3 +139,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
