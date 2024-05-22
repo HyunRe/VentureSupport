@@ -1,0 +1,86 @@
+패키지 구조(대략)
+//grooby
+com.example.myactivity2
+├── data
+│   ├── model
+│   ├── repository
+│   └── network
+├── ui
+│   ├── main
+│   │   ├── MainActivity.kt
+│   │   └── MainViewModel.kt
+│   ├── home
+│   │   ├── homeFragment.kt
+│   │   └── homeViewModel.kt
+│   ├── login
+│   │   ├── loginFragment.kt
+│   │   └── loginViewModel.kt
+│   ├── sign
+│   │   ├── signFragment.kt
+│   │   └── signViewModel.kt
+│   ├── naverLogin
+│   │   ├── naverLoginFragment.kt
+│   │   └── naverLoginViewModel.kt
+│   ├── ledge
+│   │   ├── ledgeFragment.kt
+│   │   └── ledgeViewModel.kt
+│   └── confirm
+│       ├── confirmFragment.kt
+│       └── confirmViewModel.kt
+│ //대시보드(아마 사이트맵)
+│ //노티피케이션즈
+├── utils
+└── App.kt
+
+
+
+서버의 order(및 user)에 
+contact_num //연락처를 추가해야 할지.
+그 밖:
+deadline //요구기한: 당일 주문만 받는다고 가정하고 무시할지.
+enterprize_num //사업자번호(***-**-*****): 일반인&일용직 등도 사용 가능케 할 거라면 불요.
+/*그러나 추가할 예정이라면 도매업자는 면허증 번호lisence_num 추가해 가입 시 구분짓기 가능할 듯.*/
+
+서버의 product에
+capacity //용량: 미구현 시 출력단(.xml)에서 특정 수만 출력되게 조작/product_name에 포함하기로?
+
+그 밖: 
+
+
+이 코틀린 앱에선 처음 로고와, '원장 관리'와 '로그인' 버튼,  총 2개가 출력된다.
+모든 Page는 스크롤뷰이다.
+1. 원장 관리를 택하면 우선 원장 양식에 맞춘 인풋들을 출력하는 스크롤뷰 ledgePage로 이동한다. 마지막의 전송 버튼이 눌리면 '모든 내용이 작성된' 원장order{public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="order_id")
+    private int orderId;
+
+    @Column(name="customer_name")
+    private String customerName;
+
+    @Column(name="address")
+    private String address;
+
+    @OneToMany(mappedBy = "order")
+    private List<Product> products;
+
+    // Constructors
+    public Order() {
+    }}을 서버에 전송한다. 이 때 전송이 완료되면, 이용자는 비로그인 상태에서도 (customer_name 명의로) confimPage에 접근해 접수된 본인 원장my_order(//address{userId, nameForAddress, address}가 모두 일치하는)의 업로드 여부만 확인(-r)할 수 있다.
+1-1. confimPage는 서버로부터 전송받은 원장을 간략화(address.address, products.name, products.quantity)해 블록형 목록으로 스크롤뷰에 출력한다. 
+
+2. 로그인을 택하면 loginPage로 이동해 userId/email을 입력받는 ID text input과 PW text input과 그 밑의 로그인 버튼으로 이뤄진 로그인 페이지+그 밑 회원가입 버튼+그 밑 네이버 로그인 버튼이 출력된다. 
+2-1. 사용자가 로그인 인증에 성공하면 로그인 상태인 채 confimPage로 이동할 수 있다.
+2-2. 사용자가 회원가입 버튼을 누르면 signPage로 이동해 회원가입이 진행되고, userId와 email과 userName, password, kakaoUserId를 입력받고 서버에 전송해 등록한다. 등록이 완료되면 다시 loginPage로 이동하며, 이 때 이용자는 2-1또는 2-3을 진행할 수 있는 상태가 된다.
+2-3. 네이버 로그인 버튼은 naverLoginPage로 이동해 진행된다. 사용자의 정보가 api로 서버를 경유하며 인증이 성공하면, 2-1과 마찬가지로 로그인 상태인 채 confimPage로 이동할 수 있다.
+
+3. confirmPage에서 로그인 상태일 시, 이용자는 (주문원장order을 간략화해 출력한) 각 블록을 선택할 수 있다. 이 때 선택된 블록에 해당하는 order은 orderDetail 페이지에서 전체 내용을 출력해 보여주고, 해당 페이지 우상단에 있는 선택 버튼을 누르면 selectedOrder 변수에 해당 블록의 orderId가 삽입된다. 또는 각 블록 좌측의 체크박스를 선택해도 selectedOrder 변수에 해당 블록의 orderId는 삽입된다(체크박스는 전체 내용 확인 과정 생략용 선택지이다.). 마지막으로 confirmPage 우상단의 일정 추가 버튼이 눌리면 selectedOrder값을 map(server도?)으로 전달한다.
+
+/*
+ledgeSendPage에서 customer_Name과 contact_num을 조회해서 해당 이름으로 된 원장을 작성/검색해볼 수 있는 search box?
+//소매업자가 추가 주문할 예정 없이, 주문이 접수되었는지나 언제 도착할지 여부 등만 확인할 수도 있어야 맞지 않나?
+*/
+/*confirmPage: 
+//정렬: 업데이트순(default), 즐겨찾기 한 거래처순(즐찾-업뎃->비즐찾-업뎃-), 현재 내 위치에서 가까운 거리순, (원장)가격순, 주문량(횟수+물품수/2)순
+//삭제: 완료된/(비로그인 상태에서만 가능)취소된 주문 자동 삭제
+*/
