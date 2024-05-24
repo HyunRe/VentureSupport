@@ -49,7 +49,8 @@ capacity //용량: 미구현 시 출력단(.xml)에서 특정 수만 출력되�
 
 이 코틀린 앱에선 처음 로고와, '원장 관리'와 '로그인' 버튼,  총 2개가 출력된다.
 모든 Page는 스크롤뷰이다.
-1. 원장 관리를 택하면 우선 원장 양식에 맞춘 인풋들을 출력하는 스크롤뷰 ledgePage로 이동한다. 마지막의 전송 버튼이 눌리면 '모든 내용이 작성된' 원장order{public class Order {
+1. 원장 관리를 택하면 우선 원장 양식에 맞춘 인풋들을 출력하는 스크롤뷰 ledgePage로 이동한다. 
+마지막의 전송 버튼이 눌리면 '모든 내용이 작성된' 원장order{public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_id")
@@ -66,7 +67,10 @@ capacity //용량: 미구현 시 출력단(.xml)에서 특정 수만 출력되�
 
     // Constructors
     public Order() {
-    }}을 서버에 전송한다. 이 때 전송이 완료되면, 이용자는 비로그인 상태에서도 (customer_name 명의로) confimPage에 접근해 접수된 본인 원장my_order(//address{userId, nameForAddress, address}가 모두 일치하는)의 업로드 여부만 확인(-r)할 수 있다.
+    }}을 서버에 전송한다. 이 때 전송이 완료되면, 
+업체 이용자는 로그인 상태에서 (customer_name 명의로) confimPage에 접근해 
+접수된 본인 원장my_order(//address{userId, nameForAddress, address}가 모두 일치하는)의 업로드 여부만 확인
+(-r/-w/-d)할 수 있다.
 1-1. confimPage는 서버로부터 전송받은 원장을 간략화(address.address, products.name, products.quantity)해 블록형 목록으로 스크롤뷰에 출력한다. 
 
 2. 로그인을 택하면 loginPage로 이동해 userId/email을 입력받는 ID text input과 PW text input과 그 밑의 로그인 버튼으로 이뤄진 로그인 페이지+그 밑 회원가입 버튼+그 밑 네이버 로그인 버튼이 출력된다. 
