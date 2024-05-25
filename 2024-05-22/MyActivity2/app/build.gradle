@@ -1,0 +1,84 @@
+plugins {
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    //id("kotlin-kapt")
+}
+
+android {
+    namespace = "com.example.myactivity"
+    compileSdk = 34
+
+    defaultConfig {
+        applicationId = "com.example.myactivity"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    buildFeatures {
+        viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    packaging {
+        resources {
+            resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+        }
+    }
+}
+
+dependencies{
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.play.services.analytics.impl)
+    implementation(libs.androidx.recyclerview)
+    //noinspection UseTomlInstead
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    //noinspection UseTomlInstead
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
+    implementation(libs.legacy.support.core.utils)
+    implementation(libs.androidx.browser)
+    implementation(libs.androidx.constraintlayout.v113)
+    implementation(libs.androidx.security.crypto)
+    //noinspection UseTomlInstead
+    implementation("androidx.fragment:fragment-ktx")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx.v240)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.logging.interceptor)
+    implementation(libs.lottie)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+}
