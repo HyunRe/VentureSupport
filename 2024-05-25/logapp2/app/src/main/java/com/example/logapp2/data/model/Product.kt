@@ -1,5 +1,5 @@
-package com.example.myactivity.data.model
-//상품 정보
+package com.example.logapp2.data.model
+
 data class Product(
     val id: Long,
     val name: String,

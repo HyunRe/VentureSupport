@@ -1,6 +1,8 @@
+//로그인 과정 실행(도매/소매 구분해 로그인/로그아웃/회원가입/가입정보 탐색 등 통신 담당ㅇ)
+
 package com.example.myactivity.ui.login
 
-import android.content.Intent
+import LoginFormState
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,10 +15,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.myactivity.R
 import com.example.myactivity.databinding.FragmentLoginBinding
-import com.example.myactivity.ui.naverLogin.naverLoginFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +29,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
 
+
+
 class LoginFragment : Fragment() {
     private var loginViewModel: LoginViewModel? = null
     private var binding: FragmentLoginBinding? = null
@@ -38,13 +40,14 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding!!.getRoot()
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+
+        loginViewModel = ViewModelProvider().get(LoginViewModel::class.java)
+            //.get(LoginViewModel::class.java)
         val usernameEditText = binding!!.username
         val passwordEditText = binding!!.password
         val loginButton = binding!!.login
@@ -113,7 +116,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun ViewModelProvider(loginFragment: LoginFragment, loginViewModelFactory: LoginViewModelFactory): Any {
+    private fun ViewModelProvider(loginFragment: LoginFragment): Any {
 
     }
 
@@ -138,16 +141,6 @@ class LoginFragment : Fragment() {
     //* btnLogin.setOnClickListener {
             // 로그인 로직: 상부에 이미 완성?
       //  } 아래 코드 코틀린식으로 작성하디
-
-        btnSignUp.setOnClickListener {
-            val intent = Intent(this, SignFragment::class.java)
-            startActivity(intent)
-        }
-
-        btnNaverLogin.setOnClickListener {
-            val intent = Intent(this, naverLoginFragment::class.java)
-            startActivity(intent)
-        }
 
     private fun handleLogin() {
         val email = binding.emailEditText.text.toString()
@@ -198,6 +191,10 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun runOnUiThread(function: () -> Unit) {
+
     }
 
     private fun showAlert(title: String, message: String) {

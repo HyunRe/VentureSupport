@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.logapp2.R
 import com.example.logapp2.data.User
-import com.example.logapp2.data.RetrofitInstance
+import com.example.logapp2.data.network.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

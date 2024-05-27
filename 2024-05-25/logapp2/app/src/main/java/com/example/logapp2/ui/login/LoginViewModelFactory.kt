@@ -3,7 +3,7 @@ package com.example.logapp2.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.logapp2.data.LoginDataSource
-import com.example.logapp2.data.LoginRepository
+import com.example.logapp2.data.network.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

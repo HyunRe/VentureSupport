@@ -1,5 +1,6 @@
-package com.example.logapp2.data
+package com.example.logapp2.data.network
 
+import com.example.logapp2.data.User
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

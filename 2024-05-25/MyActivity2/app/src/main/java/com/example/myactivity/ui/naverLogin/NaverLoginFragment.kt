@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myactivity.R
 import com.example.myactivity.databinding.FragmentLoginBinding
 
-class naverLoginFragment : Fragment() {
+class NaverLoginFragment : Fragment() {
     private var loginViewModel: LoginViewModel? = null
     private var binding: FragmentLoginBinding? = null
     override fun onCreateView(
@@ -35,21 +35,21 @@ class naverLoginFragment : Fragment() {
         val passwordEditText = binding!!.password
         val loginButton = binding!!.login
         val loadingProgressBar = binding!!.loading
-        loginViewModel!!.getLoginFormState().observe(
+        loginViewModel!!.getNaverLoginFormState().observe(
             getViewLifecycleOwner(),
-            Observer<naverLoginFormState?> { naverLoginFormState ->
-                if (naverLoginFormState == null) {
+            Observer<NaverLoginFormState?> { NaverLoginFormState ->
+                if (NaverLoginFormState == null) {
                     return@Observer
                 }
-                loginButton.setEnabled(naverLoginFormState.isDataValid)
-                if (naverLoginFormState.usernameError != null) {
-                    usernameEditText.error = getString(naverLoginFormState.usernameError!!)
+                loginButton.setEnabled(NaverLoginFormState.isDataValid)
+                if (NaverLoginFormState.usernameError != null) {
+                    usernameEditText.error = getString(NaverLoginFormState.usernameError!!)
                 }
-                if (naverLoginFormState.passwordError != null) {
-                    passwordEditText.error = getString(naverLoginFormState.passwordError!!)
+                if (NaverLoginFormState.passwordError != null) {
+                    passwordEditText.error = getString(NaverLoginFormState.passwordError!!)
                 }
             })
-        loginViewModel!!.getLoginResult()
+        loginViewModel!!.getNaverLoginResult()
             .observe(getViewLifecycleOwner(), Observer<naverLoginResult?> { naverLoginResult ->
                 if (naverLoginResult == null) {
                     return@Observer
@@ -101,15 +101,15 @@ class naverLoginFragment : Fragment() {
     private fun updateUiWithUser(model: LoggedInaverUserView?) {
         val welcome = getString(R.string.welcome) + model!!.displayName
         // TODO : initiate successful logged in experience
-        if (context != null && context!!.applicationContext != null) {
-            Toast.makeText(context!!.applicationContext, welcome, Toast.LENGTH_LONG).show()
+        if (context != null && requireContext().applicationContext != null) {
+            Toast.makeText(requireContext().applicationContext, welcome, Toast.LENGTH_LONG).show()
         }
     }
 
     private fun showLoginFailed(@StringRes errorString: Int?) {
-        if (context != null && context!!.applicationContext != null) {
+        if (context != null && requireContext().applicationContext != null) {
             Toast.makeText(
-                context!!.applicationContext,
+                requireContext().applicationContext,
                 errorString!!,
                 Toast.LENGTH_LONG
             ).show()

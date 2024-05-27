@@ -19,7 +19,7 @@ interface ApiService {
     suspend fun sendOrder(@Body order: Order): Boolean
 
     @GET("/order/{id}")
-    suspend fun getOrderById(@Path("id") orderId: Int): Order
+    suspend fun getOrderById(@Path("id") id: Order): Order
 
     @POST("/login")
     suspend fun login(@Body email: String, @Body password: String): Boolean

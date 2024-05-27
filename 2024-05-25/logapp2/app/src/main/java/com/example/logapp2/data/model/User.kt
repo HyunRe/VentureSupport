@@ -1,6 +1,5 @@
-package com.example.logapp2.data
+package com.example.logapp2.data.model
 
-//package com.example.myactivity.data.model
 
 // User.kt
 data class User(

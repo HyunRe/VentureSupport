@@ -21,7 +21,6 @@ import com.google.android.material.snackbar.Snackbar
 
 
 
-
 class ConfirmActivity : AppCompatActivity() {
     private var mAppBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +37,7 @@ class ConfirmActivity : AppCompatActivity() {
         val navHostFragment =
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment?)!!
         val navController = navHostFragment.navController
-        val navigationView: NavigationView = binding.navView
+        val navigationView: BottomNavigationView = binding.navView
         if (navigationView != null) {
             mAppBarConfiguration = AppBarConfiguration.Builder(
                 R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings

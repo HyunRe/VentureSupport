@@ -11,13 +11,13 @@ import com.example.myactivity.data.model.LoggedInUser
 
 class LoginViewModel internal constructor(private val loginRepository: LoginRepository) :
     ViewModel() {
-    private val loginFormState = MutableLiveData<naverLoginFormState>()
+    private val loginFormState = MutableLiveData<NaverLoginFormState>()
     private val loginResult = MutableLiveData<naverLoginResult>()
-    fun getLoginFormState(): LiveData<naverLoginFormState> {
+    fun getNaverLoginFormState(): LiveData<NaverLoginFormState> {
         return loginFormState
     }
 
-    fun getLoginResult(): LiveData<naverLoginResult> {
+    fun getNaverLoginResult(): LiveData<naverLoginResult> {
         return loginResult
     }
 
@@ -34,11 +34,11 @@ class LoginViewModel internal constructor(private val loginRepository: LoginRepo
 
     fun loginDataChanged(username: String?, password: String?) {
         if (!isUserNameValid(username)) {
-            loginFormState.setValue(naverLoginFormState(R.string.invalid_username, null))
+            loginFormState.setValue(NaverLoginFormState(R.string.invalid_username, null))
         } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(naverLoginFormState(null, R.string.invalid_password))
+            loginFormState.setValue(NaverLoginFormState(null, R.string.invalid_password))
         } else {
-            loginFormState.setValue(naverLoginFormState(true))
+            loginFormState.setValue(NaverLoginFormState(true))
         }
     }
 

@@ -71,9 +71,11 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.logging.interceptor)
     implementation(libs.lottie)
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    //mplementation (com.squareup.retrofit2:retrofit:2.9.0)
+    //implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.constraintlayout.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

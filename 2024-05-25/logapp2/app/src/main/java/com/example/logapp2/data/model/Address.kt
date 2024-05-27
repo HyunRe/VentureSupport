@@ -1,8 +1,8 @@
-package com.example.myactivity.data.model
-//주소 클래스
+package com.example.logapp2.data.model
+
 
 data class Address(
-    val id: Long,
+    val id: Long?,
     val street: String?,
     val city: String?,
     val state: String?,

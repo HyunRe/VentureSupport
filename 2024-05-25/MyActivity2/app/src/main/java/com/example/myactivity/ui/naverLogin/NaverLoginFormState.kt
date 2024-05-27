@@ -3,7 +3,7 @@ package com.example.myactivity.ui.naverLogin
 /**
  * Data validation state of the login form.
  */
-internal class naverLoginFormState {
+internal class NaverLoginFormState {
     var usernameError: Int?
         private set
     var passwordError: Int?

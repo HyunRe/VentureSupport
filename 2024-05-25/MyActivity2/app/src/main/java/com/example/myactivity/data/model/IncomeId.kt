@@ -1,6 +1,7 @@
 package com.example.myactivity.data.model
 
-abstract class IncomeId {
+//총수입
+data class IncomeId(
     val user: List<User>,
-    abstract val shipmentId: Long
-}
+    val shipmentId: Long
+)

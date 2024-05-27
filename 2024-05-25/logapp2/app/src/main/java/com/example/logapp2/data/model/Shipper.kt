@@ -1,7 +1,7 @@
-package com.example.myactivity.data.model
-//운송자 정보
+package com.example.logapp2.data.model
+
 data class Shipper(
-    val id: Long,
+    val id: Long?,
     val name: String?,
     val phone: String?,
     val available: Boolean

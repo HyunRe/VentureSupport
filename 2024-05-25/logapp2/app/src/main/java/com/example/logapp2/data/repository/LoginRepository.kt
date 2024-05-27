@@ -1,6 +1,7 @@
-package com.example.myactivity.data
+package com.example.logapp2.data.repository
 
-import com.example.myactivity.data.model.LoggedInUser
+import com.example.logapp2.data.LoginDataSource
+import com.example.logapp2.data.model.LoggedInUser
 import kotlin.concurrent.Volatile
 
 /**
@@ -26,9 +27,9 @@ private constructor(private val dataSource: LoginDataSource) {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    fun login(username: String?, password: String?): Result<LoggedInUser> {
+    fun login(username: String?, password: String?): com.example.logapp2.data.Result<LoggedInUser> {
         // handle login
-        val result = dataSource.login(username, password)
+        val result: com.example.logapp2.data.Result<LoggedInUser> = dataSource.login(username, password)
         if (result is Result.Success<*>) {
             setLoggedInUser((result as Result.Success<LoggedInUser?>).data)
         }
@@ -38,6 +39,7 @@ private constructor(private val dataSource: LoginDataSource) {
     companion object {
         @Volatile
         private var instance: LoginRepository? = null
+        @JvmStatic
         fun getInstance(dataSource: LoginDataSource): LoginRepository? {
             if (instance == null) {
                 instance = LoginRepository(dataSource)

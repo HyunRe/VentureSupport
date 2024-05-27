@@ -1,5 +1,5 @@
 package com.example.logapp2.ui.login
-import com.example.logapp2.data.RetrofitInstance
+import com.example.logapp2.data.network.RetrofitInstance
 import com.example.logapp2.data.User
 
 import retrofit2.Call

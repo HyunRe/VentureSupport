@@ -1,12 +1,12 @@
 package com.example.myactivity.data.model
-
+//유저 정보
 // User.kt
 data class User(
     val username: String?,
     val password: String?,
     val email: String?,
-    val latitude: Double = 10.1234,
-    val longitude: Double = 20.5678,
+    val latitude: Double, //위도
+    val longitude: Double, //경도
     val navId: String? = null
 )
 

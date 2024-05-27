@@ -28,9 +28,9 @@ private constructor(private val dataSource: LoginDataSource) {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    fun login(username: String?, password: String?): Result<LoggedInUser> {
+    fun login(username: String?, password: String?): Result<Any?> {
         // handle login
-        val result: Result<LoggedInUser> = dataSource.login(username, password)
+        val result: Result<Any?> = dataSource.login(username, password)
         if (result is Result.Success<*>) {
             setLoggedInUser((result as Result.Success<LoggedInUser?>).data)
         }
