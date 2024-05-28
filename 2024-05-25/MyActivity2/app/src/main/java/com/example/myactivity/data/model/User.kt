@@ -5,8 +5,8 @@ data class User(
     val username: String?,
     val password: String?,
     val email: String?,
-    val latitude: Double, //위도
-    val longitude: Double, //경도
+    //위도
+    val longitude: Double?, //경도
     val navId: String? = null
 )
 
