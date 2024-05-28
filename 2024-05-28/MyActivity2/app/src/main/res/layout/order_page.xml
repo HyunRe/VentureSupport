@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- activity_order.xml -->
+    <Button
+        android:id="@+id/btnCreateOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Order" />
+
+    <Button
+        android:id="@+id/btnGetAllOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get All Orders" />
+
+    <Button
+        android:id="@+id/btnGetOrderById"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Order By ID" />
+
+    <Button
+        android:id="@+id/btnUpdateOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Order" />
+
+    <Button
+        android:id="@+id/btnDeleteOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Order" />
+</LinearLayout>
