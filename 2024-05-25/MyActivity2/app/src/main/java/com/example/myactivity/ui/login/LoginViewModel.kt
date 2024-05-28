@@ -1,20 +1,28 @@
 package com.example.myactivity.ui.login
 
+import LoginFormState
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myactivity.R
+import com.example.myactivity.data.LoginDataSource
 import com.example.myactivity.data.Result
+import com.example.myactivity.data.SignUpResponse
 import com.example.myactivity.data.model.LoggedInUser
 import com.example.myactivity.data.network.ApiRepository
 import com.example.myactivity.data.repository.LoginRepository
+import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class LoginViewModel internal constructor(private val loginRepository: LoginRepository) :
     ViewModel() {
     private val ApiRepository = ApiRepository()
     val loginFormState = MutableLiveData<LoginFormState>()
     val loginResult = MutableLiveData<LoginResult>()
+    private val _signUpResult = MutableLiveData<Response<SignUpResponse>>()
+    val signUpResult: LiveData<Response<SignUpResponse>> = _signUpResult
     fun getLoginFormState(): LiveData<LoginFormState> {
         return loginFormState
     }
@@ -34,7 +42,7 @@ class LoginViewModel internal constructor(private val loginRepository: LoginRepo
 
         if (isEmail) {
             // 이메일 형식인 경우
-            result = dataSource.loginWithEmail(emailOrUsername, password)
+            result = LoginDataSource.loginWithEmail(emailOrUsername, password)
         } else {
             // 유저네임 형식인 경우
             result = dataSource.loginWithUsername(emailOrUsername, password)
@@ -74,4 +82,9 @@ class LoginViewModel internal constructor(private val loginRepository: LoginRepo
     private fun isPasswordValid(password: String?): Boolean {
         return password != null && password.trim { it <= ' ' }.length > 5
     }
+    fun signUp(signUpData: SignUpData) {
+        viewModelScope.launch {
+            val response = repository.signUp(signUpData)
+            _signUpResult.postValue(response)
+        }
 }

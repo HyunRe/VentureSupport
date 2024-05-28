@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.myactivity.databinding.FragmentLogin2Binding
+import com.example.myactivity.databinding.FragmentHomeBinding
 
 /**
  * A placeholder fragment containing a simple view.
  */
 class PlaceholderFragment : Fragment() {
     private var pageViewModel: PageViewModel? = null
-    private var binding: FragmentLogin2Binding? = null
+    private var binding: FragmentHomeBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java)
@@ -29,10 +28,10 @@ class PlaceholderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLogin2Binding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding!!.getRoot()
-        val textView: TextView = binding.sectionLabel
-        pageViewModel!!.text.observe(getViewLifecycleOwner()) { s -> textView.text = s }
+        //val textView: TextView = binding.sectionLabel
+        //pageViewModel!!.text.observe(getViewLifecycleOwner()) { s -> textView.text = s }
         return root
     }
 
