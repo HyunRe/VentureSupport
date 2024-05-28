@@ -2,8 +2,8 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.model.Payment
 import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.model.Payment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,11 +37,12 @@ class PaymentApiService(private val context: Context) {
         apiService.getPaymentById(id).enqueue(object : Callback<Payment> {
             override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
                 if (response.isSuccessful) {
-                    Log.d("PaymentApiService", "Payment 조회 성공: ${response.body()}")
-                    Toast.makeText(context, "Payment 정보를 성공적으로 조회했습니다.", Toast.LENGTH_SHORT).show()
+                    val payment = response.body()
+                    Log.d("PaymentCli", "결제 조회 성공: $payment")
+                    Toast.makeText(context, "결제 조회 성공", Toast.LENGTH_SHORT).show()
                 } else {
-                    Log.e("PaymentApiService", "Payment 조회 실패: ${response.errorBody()?.string()}")
-                    Toast.makeText(context, "Payment 정보 조회에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    Log.e("PaymentCli", "결제 조회 실패")
+                    Toast.makeText(context, "결제 조회 실패", Toast.LENGTH_SHORT).show()
                 }
             }
 

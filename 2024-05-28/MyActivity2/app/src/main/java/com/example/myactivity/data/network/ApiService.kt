@@ -76,11 +76,13 @@ interface ApiService {
     // Authentication endpoints
     @POST("/api/auth/register")
     fun registerUser(@Body user: User): Call<String>
+    @POST("/api/auth/login")
+    fun loginUser(@Body user: User): Call<String>
 
     @POST("api/navLogin")
     fun naverLogin(@Body accessToken: String): Response<Boolean>
 
-    //Warehouse endpoints
+    //차량 endpoints
     @GET("/api/vehicle-inventory")
     fun getAllVehicleInventory(): Call<List<VehicleInventory>>
 
@@ -95,6 +97,8 @@ interface ApiService {
 
     @DELETE("/api/vehicle-inventory/{id}")
     fun deleteVehicleInventory(@Path("id") id: Int): Call<Void>
+
+    //디테일 물품정보
 
     @GET("/api/product-information")
     fun getAllProductInformation(): Call<List<ProductInformation>>
@@ -111,9 +115,7 @@ interface ApiService {
     @DELETE("/api/product-information/{orderId}/{productId}/{userId}")
     fun deleteProductInformation(@Path("orderId") orderId: Int, @Path("productId") productId: Int, @Path("userId") userId: Int): Call<Void>
 
-    @POST("/api/auth/login")
-    fun loginUser(@Body user: User): Call<String>
-
+    //창고
     @GET("/api/warehouses")
     fun getAllWarehouses(): Call<List<Warehouse>>
 

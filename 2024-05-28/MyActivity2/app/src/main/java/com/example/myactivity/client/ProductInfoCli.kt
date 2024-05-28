@@ -4,8 +4,8 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.model.ProductInformation
 import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.model.ProductInformation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +20,7 @@ class ProductInformationClient(private val context: Context) {
         apiService.getAllProductInformation().enqueue(object : Callback<List<ProductInformation>> {
             override fun onResponse(call: Call<List<ProductInformation>>, response: Response<List<ProductInformation>>) {
                 if (response.isSuccessful) {
+                    val productInformationList = response.body()
                     Log.d("ProductInformationClient", "모든 제품 정보 조회 성공: ${response.body()}")
                     Toast.makeText(context, "모든 제품 정보를 성공적으로 조회했습니다.", Toast.LENGTH_SHORT).show()
                 } else {
@@ -40,6 +41,7 @@ class ProductInformationClient(private val context: Context) {
         apiService.getProductInformationById(orderId, productId, userId).enqueue(object : Callback<ProductInformation> {
             override fun onResponse(call: Call<ProductInformation>, response: Response<ProductInformation>) {
                 if (response.isSuccessful) {
+                    val productInformation = response.body()
                     Log.d("ProductInformationClient", "제품 정보 조회 성공: ${response.body()}")
                     Toast.makeText(context, "제품 정보를 성공적으로 조회했습니다.", Toast.LENGTH_SHORT).show()
                 } else {
@@ -60,6 +62,7 @@ class ProductInformationClient(private val context: Context) {
         apiService.createProductInformation(productInformation).enqueue(object : Callback<ProductInformation> {
             override fun onResponse(call: Call<ProductInformation>, response: Response<ProductInformation>) {
                 if (response.isSuccessful) {
+                    val createdProductInformation = response.body()
                     Log.d("ProductInformationClient", "제품 정보 생성 성공: ${response.body()}")
                     Toast.makeText(context, "제품 정보가 성공적으로 생성되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
@@ -80,6 +83,7 @@ class ProductInformationClient(private val context: Context) {
         apiService.updateProductInformation(productInformation).enqueue(object : Callback<ProductInformation> {
             override fun onResponse(call: Call<ProductInformation>, response: Response<ProductInformation>) {
                 if (response.isSuccessful) {
+                    val updatedProductInformation = response.body()
                     Log.d("ProductInformationClient", "제품 정보 업데이트 성공: ${response.body()}")
                     Toast.makeText(context, "제품 정보가 성공적으로 업데이트되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {

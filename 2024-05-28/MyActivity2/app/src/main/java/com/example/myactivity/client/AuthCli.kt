@@ -2,13 +2,13 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.model.User
 import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AuthCli() {
+class AuthCli(private val context: Context) {
 
     private val apiService = RetrofitClient.apiService
 

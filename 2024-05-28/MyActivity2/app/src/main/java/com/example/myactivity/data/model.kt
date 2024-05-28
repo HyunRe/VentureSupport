@@ -1,6 +1,7 @@
 package com.example.myactivity.data.model
 //주소 클래스
 
+import java.sql.Date
 import java.time.LocalDate
 
 //로그인 유저 구분 클래스
@@ -56,13 +57,17 @@ data class ApiResponse(
 //주문 정보
 
 data class Order(
-    val id: Int,
+    val orderId: Int,
     val userId: String,
-    val date: String,
-    val customerName: String,
-    val address: List<Address>,
-    val products: List<Product>,// Assuming Product is another data class
-    val shipper: String? = null,
+    val date: Date,
+    val supplierName: String,
+    val supplierPhoneNumber: String,
+    val supplierLocation: String,
+    val salary: Double,
+
+    //val address: List<Address>,
+    //val products: List<Product>,// Assuming Product is another data class
+    //val shipper: String? = null,
 
     )
 
@@ -75,21 +80,22 @@ data class Payment(
 
 //상품 정보
 data class Product(
-    val id: Long,
+    val productid: Int,
     val name: String,
+    val description: String,
     val price: Double,
     val quantity: Int,
-    val companyUserId: Long,
+    //val companyUserId: Long,
 )
 
 data class ProductInformationId(
-    val orderId: Order,
-    val productId: Product,
-    val userId: User,
+    val orderId: Int,
+    val productId: Int,
+    val userId: Int,
 )
 
 data class ProductInformation(
-    val ProductInformationId: ProductInformationId,
+    val id: ProductInformationId,
     val orderId: Order,
     val productId: Product,
     val userId: User,
@@ -115,10 +121,10 @@ data class User(
     val username: String?, //이용자 이름
     val password: String,
     val email: String?,
-    val phoneNumberUtils: String,
-    val latitude: Double?,//위도
-    val longitude: Double?, //경도
-    val navId: String?,
+    val phone: String,
+    val lat: Double?,//위도
+    val lng: Double?, //경도
+    //val navId: String?,
     val role: UserRole
 )
 
@@ -126,7 +132,8 @@ data class User(
 data class VehicleInventory(
     val inventoryId: Int,
     val productId: Product,
-    val userId: User
+    val userId: User,
+    val quantity: String
 )
 
 

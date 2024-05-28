@@ -1,0 +1,76 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.myactivity.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productInformationFragment"
+            app:destination="@id/productInformationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_vehicleFragment"
+            app:destination="@id/vehicleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_warehouseFragment"
+            app:destination="@id/warehouseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.myactivity.ui.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
+
+    <fragment
+        android:id="@+id/orderFragment"
+        android:name="com.example.myactivity.ui.order.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" />
+
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.myactivity.ui.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.myactivity.ui.product.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" />
+
+    <fragment
+        android:id="@+id/productInformationFragment"
+        android:name="com.example.myactivity.ui.productInformation.ProductInformationFragment"
+        android:label="fragment_product_information"
+        tools:layout="@layout/fragment_product_information" />
+
+    <fragment
+        android:id="@+id/vehicleFragment"
+        android:name="com.example.myactivity.ui.vehicle.VehicleFragment"
+        android:label="fragment_vehicle"
+        tools:layout="@layout/fragment_vehicle" />
+
+    <fragment
+        android:id="@+id/warehouseFragment"
+        android:name="com.example.myactivity.ui.warehouse.WarehouseFragment"
+        android:label="fragment_warehouse"
+        tools:layout="@layout/fragment_warehouse" />
+</navigation>
