@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="회원가입"
+        android:text="로그인/회원가입"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,16 +26,15 @@
         android:id="@+id/id_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="150dp"
         android:text="ID"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintEnd_toStartOf="+@id/username"
+        app:layout_constraintBottom_toBottomOf="@+id/username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/username"
@@ -51,20 +50,21 @@
         app:layout_constraintStart_toStartOf="@+id/id_text"
         app:layout_constraintTop_toBottomOf="@+id/section_label" />
 
+
     <TextView
         android:id="@+id/email_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="ID"
-        android:textSize="30sp"
+        android:layout_marginStart="25dp"
+        android:text="Email"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintBottom_toBottomOf="@+id/email"
         app:layout_constraintEnd_toStartOf="+@id/username"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
-
+        app:layout_constraintVertical_bias="0.955" />
 
     <EditText
         android:id="@+id/email"

@@ -3,16 +3,15 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.model.Warehouse
 import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.model.Warehouse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class WarehouseCli(private val context: Context) {
 
-    private val apiService = RetrofitClient.apiService
-
+    private val apiService = RetrofitClient.warehouseService
     // 모든 창고 조회
     fun getAllWarehouses() {
         apiService.getAllWarehouses().enqueue(object : Callback<List<Warehouse>> {

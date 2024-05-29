@@ -2,15 +2,15 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.model.VehicleInventory
 import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.model.VehicleInventory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class VehicleCli(private val context: Context) {
 
-        private val apiService = RetrofitClient.apiService
+        private val apiService = RetrofitClient.vehicleService
 
         // 모든 차량 재고 조회
         fun getAllVehicleInventory() {

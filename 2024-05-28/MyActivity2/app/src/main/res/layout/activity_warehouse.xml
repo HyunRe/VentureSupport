@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Warehouse ID 입력 -->
+        <EditText
+            android:id="@+id/warehouseIdWare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Warehouse ID"
+            android:inputType="number" />
+
+        <!-- User ID 입력 -->
+        <EditText
+            android:id="@+id/userIdWare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User ID"
+            android:inputType="number" />
+
+        <!-- Warehouse 이름 입력 -->
+        <EditText
+            android:id="@+id/warehouseNameWare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Warehouse 이름" />
+
+        <!-- Warehouse 위치 입력 -->
+        <EditText
+            android:id="@+id/warehouseLocationWare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Warehouse 위치" />
+
+        <!-- 조회, 생성, 업데이트, 삭제 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/getWarehouseBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="조회" />
+
+            <Button
+                android:id="@+id/createWarehouseBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="생성" />
+
+            <Button
+                android:id="@+id/updateWarehouseBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="업데이트" />
+
+            <Button
+                android:id="@+id/deleteWarehouseBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="삭제" />
+        </LinearLayout>
+
+        <!-- 조회, 생성, 업데이트, 삭제 결과 표시 -->
+        <TextView
+            android:id="@+id/warehouseResultWare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>

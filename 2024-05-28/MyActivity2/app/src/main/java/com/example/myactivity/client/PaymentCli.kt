@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class PaymentApiService(private val context: Context) {
 
-    private val apiService = RetrofitClient.apiService
+    private val apiService = RetrofitClient.paymentService
 
     // 모든 Payment 조회
     fun getAllPayments() {

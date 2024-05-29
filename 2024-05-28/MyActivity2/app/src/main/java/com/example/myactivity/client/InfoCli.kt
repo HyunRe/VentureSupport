@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProductInformationClient(private val context: Context) {
-    private val apiService = RetrofitClient.apiService
+    private val apiService = RetrofitClient.infoService
 
     //private val productInformationService = RetrofitClient.createService(ProductInformationService::class.java)
 

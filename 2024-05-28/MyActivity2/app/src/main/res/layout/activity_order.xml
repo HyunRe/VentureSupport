@@ -1,66 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 앱 바 -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:text="원장 작성"
-        android:theme="?attr/actionBarTheme" />
-
-
-    <!-- 스크롤뷰 -->
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/OrderId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp">
+            android:hint="Order ID" />
 
-
-
-        <!-- 주문 ID 입력 -->
-
-
-            <TextView
-            android:id="@+id/TextOrderId"
+        <TextView
+            android:id="@+id/UserId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="주문 ID"
-            android:inputType="number" />
+            android:hint="user ID" />
 
-        <!-- 사용자 ID 입력 -->
-
-            <TextView
-            android:id="@+id/TextUserId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="사용자 ID" />
-
-        <!-- 주문 날짜 입력 -->
         <EditText
             android:id="@+id/editTextOrderDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="주문 날짜를 입력하세요"
-            android:inputType="date" />
+            android:hint="Order Date" />
 
-        <!-- 고객명 입력 -->
-        <EditText
-            android:id="@+id/editTextCustomerName"
+        <TextView
+            android:id="@+id/OrderDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="고객명을 입력하세요" />
+            android:hint="Order Details" />
+
+        <TextView
+            android:id="@+id/OrderQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Order Quantity" />
+
+        <!--- 담당자 정보 입력 -->
+
+
+        <LinearLayout
+            android:id="@+id/linearlayoutsupplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="담당자 정보" />
+
+            <EditText
+                android:id="@+id/editTextSupplierName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="담당자명을 입력하세요" />
+
+            <EditText
+                android:id="@+id/editTextSupplierPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="담당자 연락처를 입력하세요" />
+        </LinearLayout>
 
         <!-- 배송지 정보 입력 -->
         <LinearLayout
@@ -104,64 +108,62 @@
                 android:inputType="number" />
         </LinearLayout>
 
-        <!-- 상품 정보 입력 -->
         <LinearLayout
-            android:id="@+id/linearlayoutProducts"
+            android:id="@+id/linearlayoutend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="상품 정보" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="비용 정보" />
 
-            <!-- 상품 ID 입력 -->
-            <TextView
-                android:id="@+id/editTextProductId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="상품 ID" />
-
-            <!-- 상품명 입력 -->
+            <!-- 비용 입력 -->
             <EditText
-                android:id="@+id/editTextProductName"
+                android:id="@+id/editTextSalary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="상품명을 입력하세요" />
-
-            <!-- 가격 입력 -->
-            <EditText
-                android:id="@+id/editTextProductPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="가격을 입력하세요"
-                android:inputType="numberDecimal" />
-
-            <!-- 수량 입력 -->
-            <EditText
-                android:id="@+id/editTextProductQuantity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="수량을 입력하세요"
+                android:hint="지급액 입력하세요"
                 android:inputType="number" />
         </LinearLayout>
 
-        <!-- 배송업체 입력 -->
-        <EditText
-            android:id="@+id/editTextShipper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="배송업체를 입력하세요" />
-
-        <!-- '원장 접수' 버튼 -->
         <Button
-            android:id="@+id/buttonSubmitLedger"
+            android:id="@+id/btnGetAllOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="원장 접수" />
+            android:text="Get All Orders" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnGetOrderById"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Order By ID" />
+
+        <Button
+            android:id="@+id/btnCreateOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Order" />
+
+        <Button
+            android:id="@+id/btnUpdateOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Order" />
+
+        <Button
+            android:id="@+id/btnDeleteOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Order" />
+
+        <TextView
+            android:id="@+id/tvOrderInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:text="Order Info will be displayed here" />
+
+    </LinearLayout>
 </ScrollView>
-    </RelativeLayout>

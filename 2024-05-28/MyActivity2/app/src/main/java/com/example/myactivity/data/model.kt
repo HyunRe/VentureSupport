@@ -1,7 +1,6 @@
 package com.example.myactivity.data.model
 //주소 클래스
 
-import java.sql.Date
 import java.time.LocalDate
 
 //로그인 유저 구분 클래스
@@ -59,7 +58,7 @@ data class ApiResponse(
 data class Order(
     val orderId: Int,
     val userId: String,
-    val date: Date,
+    val date: java.util.Date?,
     val supplierName: String,
     val supplierPhoneNumber: String,
     val supplierLocation: String,
@@ -96,9 +95,9 @@ data class ProductInformationId(
 
 data class ProductInformation(
     val id: ProductInformationId,
-    val orderId: Order,
-    val productId: Product,
-    val userId: User,
+    val order: Order,
+    val product: Product,
+    val user: User,
 )
 
 
@@ -110,9 +109,11 @@ data class Shipper(
     val available: Boolean
 )
 
-enum class UserRole (
-    SUPPLIER: String, DRIVER: String
-)
+enum class UserRole {
+    SUPPLIER,
+    DRIVER
+}
+
 
 //유저 정보
 // User.kt
@@ -124,7 +125,7 @@ data class User(
     val phone: String,
     val lat: Double?,//위도
     val lng: Double?, //경도
-    //val navId: String?,
+    val navId: String?,
     val role: UserRole
 )
 

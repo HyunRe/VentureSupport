@@ -9,8 +9,8 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
-interface ProductInfoService {
-
+interface InfoService {
+//detail product info
     @GET("/api/product-information")
     fun getAllProductInformation(): Call<List<ProductInformation>>
 

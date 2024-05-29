@@ -3,8 +3,6 @@ package com.example.myactivity.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.myactivity.R
 import com.example.myactivity.databinding.ActivityMainBinding
@@ -27,24 +25,12 @@ class MainActivity : AppCompatActivity() {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.action_homeFragment_to_authFragment,
-                R.id.action_homeFragment_to_orderFragment,
-                R.id.action_homeFragment_to_paymentFragment,
-                R.id.action_homeFragment_to_productFragment,
-                R.id.action_homeFragment_to_productInformationFragment,
-                R.id.action_homeFragment_to_vehicleFragment,
-                R.id.action_homeFragment_to_warehouseFragment
-            )
-        )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(R.id.mobile_navigation)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

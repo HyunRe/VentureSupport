@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class AuthCli(private val context: Context) {
 
-    private val apiService = RetrofitClient.apiService
+    private val apiService = RetrofitClient.authService
 
     // 사용자 등록
     fun registerUser(user: User) {

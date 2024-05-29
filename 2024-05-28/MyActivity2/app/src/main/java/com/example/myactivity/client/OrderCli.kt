@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class OrderCli(private val context: Context) {
 
-    private val apiService = RetrofitClient.apiService
+    private val apiService = RetrofitClient.orderService
 
     // 모든 주문 조회
     fun getAllOrders() {
