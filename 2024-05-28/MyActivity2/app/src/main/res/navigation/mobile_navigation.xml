@@ -1,0 +1,76 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.myactivity.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_authActivity"
+            app:destination="@id/authActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_orderActivity"
+            app:destination="@id/orderActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentActivity"
+            app:destination="@id/paymentActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_productActivity"
+            app:destination="@id/productActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_productInfoActivity"
+            app:destination="@id/productInfoActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_vehicleActivity"
+            app:destination="@id/vehicleActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_warehouseActivity"
+            app:destination="@id/warehouseActivity" />
+    </fragment>
+
+    <Activity
+        android:id="@+id/authActivity"
+        android:name="com.example.myactivity.ui.AuthActivity"
+        android:label="fragment_auth"
+        tools:layout="@layout/activity_auth" />
+
+    <Activity
+        android:id="@+id/orderActivity"
+        android:name="com.example.myactivity.ui.OrderActivity"
+        android:label="fragment_order"
+        tools:layout="@layout/activity_order" />
+
+    <Activity
+        android:id="@+id/paymentActivity"
+        android:name="com.example.myactivity.ui.PaymentActivity"
+        android:label="fragment_payment"
+        tools:layout="@layout/activity_payment" />
+
+    <Activity
+        android:id="@+id/productActivity"
+        android:name="com.example.myactivity.ui.ProductActivity"
+        android:label="fragment_product"
+        tools:layout="@layout/activity_product" />
+
+    <Activity
+        android:id="@+id/productInfoActivity"
+        android:name="com.example.myactivity.ui.ProductInfoActivity"
+        android:label="fragment_product_information"
+        tools:layout="@layout/activity_product_info" />
+
+    <Activity
+        android:id="@+id/vehicleActivity"
+        android:name="com.example.myactivity.ui.VehicleActivity"
+        android:label="fragment_vehicle"
+        tools:layout="@layout/activity_vehicle" />
+
+    <Activity
+        android:id="@+id/warehouseActivity"
+        android:name="com.example.myactivity.ui.WarehouseActivity"
+        android:label="fragment_warehouse"
+        tools:layout="@layout/activity_warehouse" />
+</navigation>

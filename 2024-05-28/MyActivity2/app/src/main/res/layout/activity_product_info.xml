@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etOrderId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Order ID" />
+
+    <EditText
+        android:id="@+id/etProductId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product ID" />
+
+    <EditText
+        android:id="@+id/etUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User ID" />
+
+    <Button
+        android:id="@+id/btnGetProductInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Product Information" />
+
+    <Button
+        android:id="@+id/btnCreateProductInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Product Information" />
+
+    <Button
+        android:id="@+id/btnUpdateProductInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Product Information" />
+
+    <Button
+        android:id="@+id/btnDeleteProductInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Product Information" />
+
+</LinearLayout>

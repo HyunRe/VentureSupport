@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/OrderId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Order ID" />
+
+        <TextView
+            android:id="@+id/UserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="user ID" />
+
+        <EditText
+            android:id="@+id/editTextOrderDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Order Date" />
+
+        <TextView
+            android:id="@+id/OrderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Order Details" />
+
+        <TextView
+            android:id="@+id/OrderQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Order Quantity" />
+
+        <!--- 담당자 정보 입력 -->
+
+
+        <LinearLayout
+            android:id="@+id/linearlayoutsupplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="담당자 정보" />
+
+            <EditText
+                android:id="@+id/editTextSupplierName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="담당자명을 입력하세요" />
+
+            <EditText
+                android:id="@+id/editTextSupplierPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="담당자 연락처를 입력하세요" />
+        </LinearLayout>
+
+        <!-- 배송지 정보 입력 -->
+        <LinearLayout
+            android:id="@+id/linearlayoutAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="배송지 정보" />
+
+            <!-- 주소 입력 -->
+            <EditText
+                android:id="@+id/editTextStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="주소를 입력하세요" />
+
+            <!-- 도시 입력 -->
+            <EditText
+                android:id="@+id/editTextCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="도시를 입력하세요" />
+
+            <!-- 주 입력 -->
+            <EditText
+                android:id="@+id/editTextState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="주를 입력하세요" />
+
+            <!-- 우편번호 입력 -->
+            <EditText
+                android:id="@+id/editTextZipcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="우편번호를 입력하세요"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayoutend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="비용 정보" />
+
+            <!-- 비용 입력 -->
+            <EditText
+                android:id="@+id/editTextSalary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="지급액 입력하세요"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGetAllOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get All Orders" />
+
+        <Button
+            android:id="@+id/btnGetOrderById"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Order By ID" />
+
+        <Button
+            android:id="@+id/btnCreateOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Order" />
+
+        <Button
+            android:id="@+id/btnUpdateOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Order" />
+
+        <Button
+            android:id="@+id/btnDeleteOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Order" />
+
+        <TextView
+            android:id="@+id/tvOrderInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:text="Order Info will be displayed here" />
+
+    </LinearLayout>
+</ScrollView>

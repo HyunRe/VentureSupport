@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etProductId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product ID" />
+
+    <EditText
+        android:id="@+id/ProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Name" />
+
+    <EditText
+        android:id="@+id/ProductDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Description" />
+
+    <EditText
+        android:id="@+id/ProductPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Price" />
+
+    <EditText
+        android:id="@+id/ProductQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Quantity" />
+
+    <Button
+        android:id="@+id/btnGetAProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Product" />
+
+    <Button
+        android:id="@+id/btnCreateAProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Product" />
+
+    <Button
+        android:id="@+id/btnUpdateAProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Product" />
+
+    <Button
+        android:id="@+id/btnDeleteAProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Product" />
+
+</LinearLayout>
