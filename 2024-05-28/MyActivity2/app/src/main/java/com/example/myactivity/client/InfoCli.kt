@@ -4,14 +4,14 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.ApiClient
 import com.example.myactivity.data.model.ProductInformation
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ProductInformationClient(private val context: Context) {
-    private val apiService = RetrofitClient.infoService
+    private val apiService = ApiClient.infoService
 
     //private val productInformationService = RetrofitClient.createService(ProductInformationService::class.java)
 

@@ -1,8 +1,6 @@
 package com.example.myactivity.data.model
 //주소 클래스
 
-import java.time.LocalDate
-
 //로그인 유저 구분 클래스
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
@@ -33,20 +31,6 @@ data class Address(
 )
 
 
-data class Income(
-    val user: List<User>, //사용
-    val shipmentId: Long, //사용
-    val amount: Double, //confirm, 즉 접수된 원장에 대해 계산 필요
-    val date: LocalDate?
-)
-
-//총수입
-data class IncomeId(
-    val user: List<User>,
-    val shipmentId: Long
-)
-
-
 data class ApiResponse(
     val success: Boolean,
     val roll: String?,
@@ -57,7 +41,7 @@ data class ApiResponse(
 
 data class Order(
     val orderId: Int,
-    val userId: String,
+    val userId: User,
     val date: java.util.Date?,
     val supplierName: String,
     val supplierPhoneNumber: String,
@@ -67,15 +51,8 @@ data class Order(
     //val address: List<Address>,
     //val products: List<Product>,// Assuming Product is another data class
     //val shipper: String? = null,
-
     )
 
-
-data class Payment(
-    val paymentId: Int,
-    val userId: User,
-    val paymentName: String,
-)
 
 //상품 정보
 data class Product(
@@ -118,15 +95,14 @@ enum class UserRole {
 //유저 정보
 // User.kt
 data class User(
-    val userId: Int,
-    val username: String?, //이용자 이름
+    val userId: Int = 0,
+    val username: String? = "user123", //이용자 이름
     val password: String,
     val email: String?,
     val phone: String,
     val lat: Double?,//위도
     val lng: Double?, //경도
-    val navId: String?,
-    val role: UserRole
+    val role: UserRole?
 )
 
 
