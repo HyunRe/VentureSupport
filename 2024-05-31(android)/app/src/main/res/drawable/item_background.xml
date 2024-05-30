@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#99CCFF" /> <!-- 배경색을 원하는 색상으로 변경 -->
+</shape>

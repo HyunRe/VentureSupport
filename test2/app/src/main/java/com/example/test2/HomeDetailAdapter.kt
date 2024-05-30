@@ -2,7 +2,6 @@ package com.example.test2
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.test2.databinding.ActivityHomeDetailBinding
 
 class HomeDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeDetailBinding
