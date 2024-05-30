@@ -15,58 +15,47 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키
     @Column(name = "product_id") // 상품 ID
-    private Integer productid;
+    private Integer productId;
 
     @Column(name = "product_name") // 상품 이름
-    private String name;
-
-    @Column(name = "product_description") // 상품 설명
-    private String description;
+    private String productName;
 
     @Column(name = "product_price") // 상품 가격
-    private Double price;
+    private Double productPrice;
 
     @Column(name = "product_quantity") // 상품 수량
-    private Integer quantity;
+    private Integer productQuantity;
 
     // Getter 및 Setter 추가
     public Integer getId() {
-        return productid;
+        return productId;
     }
 
     public void setId(Integer id) {
-        this.productid = id;
+        this.productId = id;
     }
 
     public String getName() {
-        return name;
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String productName) {
+        this.productName = productName;
     }
 
     public Double getPrice() {
-        return price;
+        return productPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPrice(Double productPrice) {
+        this.productPrice = productPrice;
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return productQuantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setQuantity(Integer productQuantity) {
+        this.productQuantity = productQuantity;
     }
 }

@@ -24,11 +24,11 @@ public class User {
     @Column(name = "user_name") // 회원 이름
     private String username;
 
-    @Column(name = "user_email") // 회원 이메일
+    @Column(name = "user_email", nullable = false) // 회원 이메일
     private String email;
 
     @Column(name = "user_phone_number") // 회원 전화번호
-    private String phone;
+    private String userPhoneNumber;
 
     @Column(name = "latitude") // 위도
     private Double lat;
@@ -36,12 +36,11 @@ public class User {
     @Column(name = "longitude") // 경도
     private Double lng;
 
-    @Column(name = "user_password") // 회원 비밀번호
-    private String password;
+    @Column(name = "user_password", nullable = false) // 회원 비밀번호
+    private String userPassword;
 
-    @Enumerated(EnumType.STRING) // Enum 값으로 매핑
-    @Column(name = "role") // 역할
-    private UserRole role;
+    @Column(name = "Inventory_quantity") // 적재 수량
+    private String inventoryQuantity;
 
     // Getters and Setters
     public Integer getUserId() {
@@ -69,11 +68,11 @@ public class User {
     }
 
     public String getPhone() {
-        return phone;
+        return userPhoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
 
     public Double getLat() {
@@ -93,17 +92,18 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public UserRole getRole() {
-        return role;
+    public String getInventoryQuantity() {
+        return inventoryQuantity;
     }
-    public void setRole(UserRole role) {
-        this.role = role;
+
+    public void setInventoryQuantity(String inventoryQuantity) {
+        this.inventoryQuantity = inventoryQuantity;
     }
 }
