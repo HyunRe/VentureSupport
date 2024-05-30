@@ -27,9 +27,10 @@ public class WarehouseService {
         return warehouseRepository.findById(id);
     }
 
-    public Warehouse createWarehouse(Warehouse warehouse) {
-        return warehouseRepository.save(warehouse);
+    public List<Warehouse> getWarehousesByUserId(Integer userId) {
+        return warehouseRepository.findByUserUserId(userId);
     }
+
     public Warehouse saveWarehouse(Warehouse warehouse) {
         return warehouseRepository.save(warehouse);
     }
