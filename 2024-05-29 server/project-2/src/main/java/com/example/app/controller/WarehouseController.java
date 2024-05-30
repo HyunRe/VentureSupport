@@ -34,11 +34,24 @@ public class WarehouseController {
     }
 
     // SELECT
+    @GetMapping("/users/{id}")
+    public ResponseEntity<List<Warehouse>> getWarehousesByUserId(@PathVariable Integer id) {
+        List<Warehouse> warehouses = warehouseService.getWarehousesByUserId(id);
+        if (!warehouses.isEmpty()) {
+            return new ResponseEntity<>(warehouses, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Warehouse> getWarehouseById(@PathVariable Integer id) {
-        Optional<Warehouse> warehouse = warehouseService.getWarehouseById(id);
-        return warehouse.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        Optional<Warehouse> warehouseOptional = warehouseService.getWarehouseById(id);
+        if (warehouseOptional.isPresent()) {
+            return new ResponseEntity<>(warehouseOptional.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // INSERT
