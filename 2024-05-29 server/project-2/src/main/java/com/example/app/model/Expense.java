@@ -17,10 +17,6 @@ public class Expense {
     @JoinColumn(name = "payment_id", nullable = false) // 결제 ID (외래키)
     private Payment payment;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false) // 회원 ID (외래키)
-    private User user;
-
     @Column(name = "expense_details") // 지출 내역
     private String expenseDetails;
 
@@ -46,14 +42,6 @@ public class Expense {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getExpenseDetails() {
