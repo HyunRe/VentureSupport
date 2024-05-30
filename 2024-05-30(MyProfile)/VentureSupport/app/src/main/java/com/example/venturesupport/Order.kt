@@ -1,3 +1,5 @@
+package com.example.venturesupport
+import User
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 

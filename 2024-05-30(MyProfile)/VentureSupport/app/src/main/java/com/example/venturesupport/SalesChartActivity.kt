@@ -1,6 +1,5 @@
 package com.example.venturesupport
 
-import Order
 import android.content.Intent
 import android.graphics.Color
 import android.icu.util.Calendar
@@ -167,10 +166,43 @@ class SalesChartActivity: AppCompatActivity() {
     }
 
     private fun updateBarChart(orders: List<Order>) {
-        // 차트 업데이트 로직
+        val entriesForeground = ArrayList<BarEntry>()
+        val monthlyTotals = FloatArray(12) { 0f }
+
+        for (order in orders) {
+            val calendar = Calendar.getInstance().apply {
+                time = order.date
+            }
+            val month = calendar.get(Calendar.MONTH)
+            monthlyTotals[month] += order.totalAmount.toFloat()
+        }
+
+        for (i in monthlyTotals.indices) {
+            entriesForeground.add(BarEntry((i + 1).toFloat(), monthlyTotals[i]))
+        }
+
+        val barDataSetForeground = BarDataSet(entriesForeground, "Sales")
+        barDataSetForeground.setColors(*ColorTemplate.COLORFUL_COLORS)
+
+        val barData = BarData(barDataSetForeground)
+        barData.barWidth = 0.4f
+
+        binding.barchart.data = barData
+        binding.barchart.invalidate() // Refresh the chart
     }
 
+
     private fun updateSalesTextView(orders: List<Order>) {
-        // 텍스트뷰 업데이트 로직
+        var totalIncome = 0
+        var totalExpense = 0
+
+        for (order in orders) {
+            totalIncome += order.totalAmount
+            totalExpense += order.salary.toInt()
+        }
+
+        binding.incomeButton.text = "${totalIncome}원"
+        binding.expenseButton.text = "${totalExpense}원"
     }
+
 }

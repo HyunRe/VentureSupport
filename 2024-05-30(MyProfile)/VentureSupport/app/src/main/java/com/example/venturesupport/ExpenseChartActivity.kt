@@ -103,7 +103,7 @@ class ExpenseChartActivity: AppCompatActivity() {
     }
 
     private fun updatePieChart(expenses: List<Expense>) {
-        val pieEntries = expenses.map { PieEntry(it.expenseAmount.toFloat(), it.expenseDetails) }
+        val pieEntries = ArrayList(expenses.map { PieEntry(it.expenseAmount.toFloat(), it.expenseDetails) })
         val dataSet = PieDataSet(pieEntries, "지출 내역")
         dataSet.colors = listOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW)
         dataSet.valueTextSize = 12f
@@ -116,8 +116,11 @@ class ExpenseChartActivity: AppCompatActivity() {
         binding.pieChart.invalidate()
     }
 
-    private fun setupPieChart(pieChart: PieChart, dataList: List<PieEntry>) {
-        val dataSet = PieDataSet(dataList, "지출 내역")
+    private fun setupPieChart(pieChart: PieChart, dataList: List<Any>) {
+        // dataList를 PieEntry 리스트로 형변환하여 전달
+        val pieEntryList = dataList.filterIsInstance<PieEntry>()
+
+        val dataSet = PieDataSet(pieEntryList, "지출 내역")
         dataSet.colors = listOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW)
         dataSet.valueTextSize = 12f
         dataSet.valueTextColor = Color.BLACK
@@ -128,11 +131,12 @@ class ExpenseChartActivity: AppCompatActivity() {
         pieChart.setUsePercentValues(true)
         pieChart.invalidate()
 
-        expenseChartAdapter = ExpenseChartAdapter(dataList)
+        expenseChartAdapter = ExpenseChartAdapter(pieEntryList)
         binding.expenseRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.expenseRecyclerView.adapter = expenseChartAdapter
         expenseChartAdapter.notifyDataSetChanged()
     }
+
 
     private fun updateExpenseTextView(expenses: List<Expense>) {
         val totalAmount = expenses.sumOf { it.expenseAmount }
