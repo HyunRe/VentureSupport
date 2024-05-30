@@ -44,6 +44,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.LoginviaNaver" >
         <activity
+            android:name="com.example.loginvianaver.ui.NaverPaymentActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.loginvianaver.ui.HomeActivity"
             android:exported="false" />
         <activity

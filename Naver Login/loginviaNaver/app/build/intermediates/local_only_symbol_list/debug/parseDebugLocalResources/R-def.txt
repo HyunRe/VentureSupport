@@ -8,8 +8,10 @@ id btnsenddata
 id buttonOAuthLoginImg
 id logout
 id main
+id webView
 layout activity_home
 layout activity_main
+layout activity_naver_payment
 mipmap ic_launcher
 mipmap ic_launcher_round
 string OAUTH_CLIENT_ID

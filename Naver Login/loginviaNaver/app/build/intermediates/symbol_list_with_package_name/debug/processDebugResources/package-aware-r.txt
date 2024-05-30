@@ -3766,6 +3766,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_home
 layout activity_main
+layout activity_naver_payment
 layout activity_oauth_webview
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
