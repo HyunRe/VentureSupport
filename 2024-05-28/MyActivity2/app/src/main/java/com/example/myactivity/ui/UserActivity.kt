@@ -3,7 +3,7 @@ package com.example.myactivity.ui
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.ApiClient
 import com.example.myactivity.data.model.User
 import com.example.myactivity.data.service.UserService
 import com.example.myactivity.databinding.ActivityUserBinding
@@ -23,7 +23,7 @@ class UserActivity : AppCompatActivity() {
         binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userService = RetrofitClient.userService
+        userService = ApiClient.userService
 
         binding.btnGetAllUsers.setOnClickListener { getAllUsers() }
         binding.btnGetUser.setOnClickListener { getUserById() }

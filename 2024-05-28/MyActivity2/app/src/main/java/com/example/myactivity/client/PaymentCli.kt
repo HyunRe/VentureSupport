@@ -2,7 +2,7 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.ApiClient
 import com.example.myactivity.data.model.Payment
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class PaymentApiService(private val context: Context) {
 
-    private val apiService = RetrofitClient.paymentService
+    private val apiService = ApiClient.paymentService
 
     // 모든 Payment 조회
     fun getAllPayments() {

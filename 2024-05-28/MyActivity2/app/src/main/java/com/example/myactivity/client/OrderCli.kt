@@ -3,7 +3,7 @@ package com.example.myactivity.client
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import com.example.myactivity.data.RetrofitClient
+import com.example.myactivity.data.ApiClient
 import com.example.myactivity.data.model.Order
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class OrderCli(private val context: Context) {
 
-    private val apiService = RetrofitClient.orderService
+    private val apiService = ApiClient.orderService
 
     // 모든 주문 조회
     fun getAllOrders() {

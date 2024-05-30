@@ -52,8 +52,8 @@ class PaymentActivity : AppCompatActivity() {
     // Helper function to get payment information from UI input
     private fun getPaymentFromInput(): Payment {
         val paymentId = binding.etPaymentId.text.toString().toIntOrNull() ?: 0
-        val userId = User() // Replace with actual user object
+        //val userId = User() // Replace with actual user object
         val paymentName = binding.etPaymentName.text.toString()
-        return Payment(paymentId, userId, paymentName)
+        return Payment(paymentId, paymentName)
     }
 }
