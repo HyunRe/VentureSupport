@@ -3,6 +3,7 @@ package com.example.app.controller;
 
 import com.example.app.model.Order;
 import com.example.app.model.User;
+import com.example.app.model.Warehouse;
 import com.example.app.repository.UserRepository;
 import com.example.app.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,18 @@ public class OrderController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<List<Order>> getOrdersByUserId(@PathVariable Integer id) {
+        List<Order> order = orderService.getOrdersByUserId(id);
+        if (!order.isEmpty()) {
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // INSERT
     @PostMapping
     public ResponseEntity<Object> createOrder(@RequestBody Order order) {
         // Assuming user_id is provided in the request body
