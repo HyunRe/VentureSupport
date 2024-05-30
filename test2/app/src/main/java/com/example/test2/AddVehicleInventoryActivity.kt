@@ -30,9 +30,12 @@ class AddVehicleInventoryActivity : AppCompatActivity() {
     }
 
     private fun saveProduct() {
+
         val name = productNameEditText.text.toString()
-        val price = productDescriptionEditText.text.toString().toDoubleOrNull() // 이제 productPrice를 사용하도록 수정
+        val price =
+            productDescriptionEditText.text.toString().toDoubleOrNull() // 이제 productPrice를 사용하도록 수정
         val quantity = productQuantityEditText.text.toString().toIntOrNull()
+
 
         if (name.isNotEmpty() && price != null && quantity != null) {
             val newProduct = Product(

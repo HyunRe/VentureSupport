@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.test2.databinding.ActivitySelectedOrderBinding
 
 class SelectedOrderActivity: AppCompatActivity() {
 

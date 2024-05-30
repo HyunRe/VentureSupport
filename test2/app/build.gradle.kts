@@ -58,7 +58,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
     // Calender
-    //implementation("com.prolificinteractive:material-calendarview:1.4.3")
+    implementation("com.prolificinteractive:material-calendarview:1.4.3")
 
     // MPAndroidChart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")

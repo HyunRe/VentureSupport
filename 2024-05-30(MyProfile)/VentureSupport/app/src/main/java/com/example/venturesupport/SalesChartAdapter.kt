@@ -11,10 +11,10 @@ class SalesChartAdapter(private val entriesForeground: ArrayList<BarEntry>) : Re
         RecyclerView.ViewHolder(binding.root) {
 
         // 수정 필요
-        fun bind(barEntry: BarEntry) {
-            binding.monthText.text = "5월"
-            binding.incomeAmount.text = "345083원"
-            binding.expenseAmount.text = "250267원"
+        fun bind(barEntry: BarEntry, month: String, income: String, expense: String) {
+            binding.monthText.text = month //"5월"
+            binding.incomeAmount.text = income//"345083원"
+            binding.expenseAmount.text = expense//"250267원"
         }
     }
 
@@ -25,7 +25,12 @@ class SalesChartAdapter(private val entriesForeground: ArrayList<BarEntry>) : Re
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(entriesForeground[position])
+        val barEntry = entriesForeground[position]
+        val month = "${position + 1}월" // 실제 데이터와 매칭되는 월 정보
+        val income = "수입 데이터" // 실제 데이터에서 가져온 수입 정보
+        val expense = "지출 데이터" // 실제 데이터에서 가져온 지출 정보
+        holder.bind(barEntry, month, income, expense)
+        //holder.bind(entriesForeground[position])
     }
 
     override fun getItemCount(): Int {

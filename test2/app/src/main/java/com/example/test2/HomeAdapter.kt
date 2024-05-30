@@ -3,7 +3,6 @@ package com.example.test2
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.test2.databinding.ItemOrderBinding
 
 class HomeAdapter(
     private val orderList: List<Order>,

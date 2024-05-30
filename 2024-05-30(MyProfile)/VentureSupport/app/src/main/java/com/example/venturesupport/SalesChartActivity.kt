@@ -1,11 +1,14 @@
 package com.example.venturesupport
 
+import Order
 import android.content.Intent
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.venturesupport.RetrofitService.orderService
 import com.example.venturesupport.databinding.SaleschartBinding
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -14,16 +17,14 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SalesChartActivity: AppCompatActivity() {
     private val binding: SaleschartBinding by lazy {
         SaleschartBinding.inflate(layoutInflater)
     }
-    /*
-    private val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-        Log.d("YearMonthPickerTest", "year = $year, month = $monthOfYear, day = $dayOfMonth")
-    }
-    */
     private lateinit var salesChartAdapter: SalesChartAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,10 @@ class SalesChartActivity: AppCompatActivity() {
 
         val cal = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR)
+
+        val userId = 1 // 실제 유저 ID로 변경 필요
+        loadPaymentById(userId)
+        loadOrdersByUserId(userId)
 
         binding.yearButton.text = "${year}년"
 
@@ -89,8 +94,10 @@ class SalesChartActivity: AppCompatActivity() {
         barChart.data = barData
 
         // X축 라벨 설정
-        val labels = arrayOf("1월", "2월", "3월", "4월", "5월", "6월",
-            "7월", "8월", "9월", "10월", "11월", "12월")
+        val labels = arrayOf(
+            "1월", "2월", "3월", "4월", "5월", "6월",
+            "7월", "8월", "9월", "10월", "11월", "12월"
+        )
 
         barChart.xAxis.labelCount = labels.size // 모든 라벨 표시
         barChart.xAxis.setGranularity(1f) // 간격 설정
@@ -116,5 +123,54 @@ class SalesChartActivity: AppCompatActivity() {
         binding.salesRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.salesRecyclerView.adapter = salesChartAdapter
         salesChartAdapter.notifyDataSetChanged()
+    }
+
+    private fun loadPaymentById(userId: Int) {
+        val call = RetrofitService.paymentService.getPaymentById(userId)
+        call.enqueue(object : Callback<Payment> {
+            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
+                if (response.isSuccessful) {
+                    val payment = response.body()
+                    binding.payLongTextView.text = payment?.paymentName ?: "결제 수단 없음"
+                } else {
+                    Toast.makeText(this@SalesChartActivity, "결제 수단 조회 실패", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<Payment>, t: Throwable) {
+                Toast.makeText(this@SalesChartActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun loadOrdersByUserId(userId: Int) {
+        val call = RetrofitService.orderService.getOrderByUserId(userId)
+        call.enqueue(object : Callback<List<Order>> {
+            override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
+                if (response.isSuccessful) {
+                    val orders = response.body()
+                    orders?.let {
+                        updateBarChart(it)
+                        updateSalesTextView(it)
+                    }
+                } else {
+                    Toast.makeText(this@SalesChartActivity, "주문 내역 조회 실패", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Order>>, t: Throwable) {
+                Toast.makeText(this@SalesChartActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun updateBarChart(orders: List<Order>) {
+        // 차트 업데이트 로직
+    }
+
+    private fun updateSalesTextView(orders: List<Order>) {
+        // 텍스트뷰 업데이트 로직
     }
 }
