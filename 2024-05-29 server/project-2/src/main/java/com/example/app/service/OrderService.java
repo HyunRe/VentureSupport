@@ -3,6 +3,7 @@ package com.example.app.service;
 
 import com.example.app.model.Order;
 import com.example.app.model.User;
+import com.example.app.model.Warehouse;
 import com.example.app.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class OrderService {
 
     public Optional<Order> getOrderById(Integer id) {
         return orderRepository.findById(id);
+    }
+
+    public List<Order> getOrdersByUserId(Integer userId) {
+        return orderRepository.findByUserUserId(userId);
     }
 
     public Order saveOrder(Order order) {
