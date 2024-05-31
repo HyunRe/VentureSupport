@@ -64,10 +64,25 @@ class MyProfileActivity: Fragment() {
 
         // 결제 수단 조회 (수정 필요)
         binding.PaymentButton.setOnClickListener {
+            val intentUser = User(
+                userId = myprofileLists[0].userId,
+                username = myprofileLists[0].username,
+                email = myprofileLists[0].email,
+                lat = myprofileLists[0].lat,
+                lng = myprofileLists[0].lng,
+                phone = myprofileLists[0].phone,
+                role = myprofileLists[0].role,
+                password = myprofileLists[0].password
+            )
+
             // 결제 수단 창 이동
             // 결제 수단 창 새로 구현 (카드 입력 받는 걸로? 카드사, 카드 이름, 카드 번호 / payment 카드 이름 db에 저장)
             // 지출 내역 입력 창 (지출 내역, 지출 액, 지출 일 - 리사이클러 뷰)
+
+        val intent = Intent(requireContext(), PaymentActivity::class.java).apply {
+            putExtra("user", intentUser)
         }
+        startActivity(intent)
 
         binding.WarehouseButton.setOnClickListener {
             val intentUser = User(
@@ -136,6 +151,24 @@ class MyProfileActivity: Fragment() {
 
         return view
     }
+
+    /*private fun loadPaymentById(userId: Int) {
+        val call = RetrofitService.paymentService.getPaymentById(userId)
+        call.enqueue(object : Callback<Payment> {
+            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
+                if (response.isSuccessful) {
+                    val payment = response.body()
+                    return payment.paymentName
+                } else {
+                    Toast.makeText(this@PaymentActivity, "결제 수단을 추가해 주세요", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Payment>, t: Throwable) {
+                Toast.makeText(this@PaymentActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }*/
 
     // 현재 로그인 한 user 정보 가져 오기
     private fun fetchUserById(userId: Int) {

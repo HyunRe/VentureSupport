@@ -6,14 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.venturesupport.databinding.ExpensechartItemBinding
 import com.github.mikephil.charting.data.PieEntry
 
-class ExpenseChartAdapter(private val dataList: ArrayList<PieEntry>) : RecyclerView.Adapter<ExpenseChartAdapter.ViewHolder>() {
+class ExpenseChartAdapter(private val dataList: List<PieEntry>) : RecyclerView.Adapter<ExpenseChartAdapter.ViewHolder>() {
+    // ViewHolder 및 onBind 메서드는 이전과 동일하게 유지됩니다.
+
     inner class ViewHolder(private val binding: ExpensechartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            // pieEntry.value를 기준으로 dataList를 내림차순으로 정렬합니다.
-            dataList.sortByDescending { it.value }
-        }
 
         // 수정 필요 (색 수정)
         fun bind(pieEntry: PieEntry) {

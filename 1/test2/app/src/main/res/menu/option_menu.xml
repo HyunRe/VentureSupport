@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/selectedorderlist"
+        android:title="수락한 물류 작성 건 목록"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/vehicleinventorylist"
+        android:title="차량 재고 관리"
+        app:showAsAction="never" />
+</menu>

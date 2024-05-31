@@ -1,6 +1,5 @@
 package com.example.test2
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -76,4 +75,7 @@ class ResisterActivity: AppCompatActivity() {
             }
         })
     }
+}
+
+
 }

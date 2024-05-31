@@ -52,13 +52,22 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:3.11.0")
     implementation("androidx.tracing:tracing-perfetto-handshake:1.0.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
-
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+    implementation ("com.google.guava:guava:31.1-android")
     // Calender
     //implementation("com.prolificinteractive:material-calendarview:1.4.3")
 
     // MPAndroidChart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("androidx.room:room-runtime-android:2.7.0-alpha02")
+
+    implementation("com.android.billingclient:billing-ktx:5.0.0")
+    implementation("com.google.android.gms:play-services-wallet:19.3.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+    runtimeOnly ("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
