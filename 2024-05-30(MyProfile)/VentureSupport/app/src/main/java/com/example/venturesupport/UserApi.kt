@@ -9,9 +9,11 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface UserApi {
-    @GET("users/{id}")
+    @GET("users/{id}") //일련번호에 해당하는 유저정보 획득
     fun getUserById(@Path("id") id: Int): Call<User>
 
-    @PUT("users/{id}")
+    @PUT("users/{id}") //일련번호에 해당하는 유저 정보 갱신
     fun updateUser(@Path("id") id: Int, @Body user: User): Call<ResponseBody>
+
+
 }

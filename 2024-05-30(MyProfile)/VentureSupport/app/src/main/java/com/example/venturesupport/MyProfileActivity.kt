@@ -17,13 +17,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyProfileActivity: Fragment() {
+class MyProfileActivity : Fragment() {
+
     private val binding: MyprofileBinding by lazy {
         MyprofileBinding.inflate(layoutInflater)
     }
+
+    // 사용자 프로필 어댑터
     private lateinit var myprofileAdapter: MyProfileAdapter
+
+    // 차트 어댑터
     private lateinit var mychartAdapter: MyChartAdapter
+
+    // 사용자 프로필 목록
     private var myprofileLists = ArrayList<User>()
+
+    // 차트 목록
     private var chartLists = ArrayList<MyChart>()
 
     override fun onCreateView(
@@ -32,25 +41,72 @@ class MyProfileActivity: Fragment() {
     ): View {
         val view = binding.root
 
-        // 현재 로그인 한 user 정보 가져 오기
-        fetchUserById(1)
+        // 사용자 정보 조회
+        getUserById(1)
 
-        // 유저 조회
+        // 사용자 프로필 어댑터 초기화 및 클릭 리스너 설정
         myprofileAdapter = MyProfileAdapter(myprofileLists)
         myprofileAdapter.setOnItemClickListener(object : MyProfileAdapter.OnItemClickListeners {
             override fun onItemClick(binding: MyprofileItemBinding, user: User, position: Int) {
-                val intentUser = User(
-                    userId = user.userId,
-                    username = user.username,
-                    email = user.email,
-                    lat = user.lat,
-                    lng = user.lng,
-                    phone = user.phone,
-                    role = user.role,
-                    password = user.password
-                )
-
+                // 사용자 프로필 수정 화면으로 이동
                 val intent = Intent(requireContext(), EditProfileActivity::class.java).apply {
+                    putExtra("user", user)
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        })
+
+        // 리사이클러뷰 설정
+        binding.MyProfileRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.MyProfileRecyclerView.adapter = myprofileAdapter
+
+        // 결제 수단 조회 버튼 클릭 시
+        binding.PaymentButton.setOnClickListener {
+            // PaymentActivity로 이동
+            val intent = Intent(requireContext(), PaymentActivity::class.java).apply {
+                putExtra("user", myprofileLists.firstOrNull())
+            }
+            startActivity(intent)
+        }
+
+        // 창고 관리 버튼 클릭 시
+        binding.WarehouseButton.setOnClickListener {
+            if (myprofileLists.isNotEmpty()) {
+                // 사용자 정보가 있을 경우 WarehouseActivity로 이동
+                val intentUser = myprofileLists[0]
+                val intent = Intent(requireContext(), WarehouseActivity::class.java).apply {
+                    putExtra("user", intentUser)
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireContext(), "사용자 목록이 비어 있습니다", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // 차트 데이터 설정
+        chartLists = ArrayList<MyChart>().apply {
+            add(MyChart(R.drawable.sales, "내 매출 내역"))
+            add(MyChart(R.drawable.income, "내 수익 내역"))
+            add(MyChart(R.drawable.expense, "내 지출 내역"))
+        }
+
+        // 차트 어댑터 초기화 및 클릭 리스너 설정
+        mychartAdapter = MyChartAdapter(chartLists)
+        mychartAdapter.setOnItemClickListener(object : MyChartAdapter.OnItemClickListeners {
+            override fun onItemClick(
+                binding: MychartItemBinding,
+                myChart: MyChart,
+                position: Int
+            ) {
+                val intentUser = myprofileLists.firstOrNull()
+                val intent: Intent = when (position) {
+                    0 -> Intent(requireContext(), SalesChartActivity::class.java)
+                    1 -> Intent(requireContext(), IncomeChartActivity::class.java)
+                    2 -> Intent(requireContext(), ExpenseChartActivity::class.java)
+                    else -> return
+                }.apply {
                     putExtra("user", intentUser)
                 }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -58,139 +114,35 @@ class MyProfileActivity: Fragment() {
             }
         })
 
-        binding.MyProfileRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.MyProfileRecyclerView.adapter = myprofileAdapter
-        myprofileAdapter.notifyDataSetChanged()
-
-        // 결제 수단 조회 (수정 필요)
-        binding.PaymentButton.setOnClickListener {
-            val intentUser = User(
-                userId = myprofileLists[0].userId,
-                username = myprofileLists[0].username,
-                email = myprofileLists[0].email,
-                lat = myprofileLists[0].lat,
-                lng = myprofileLists[0].lng,
-                phone = myprofileLists[0].phone,
-                role = myprofileLists[0].role,
-                password = myprofileLists[0].password
-            )
-
-            // 결제 수단 창 이동
-            // 결제 수단 창 새로 구현 (카드 입력 받는 걸로? 카드사, 카드 이름, 카드 번호 / payment 카드 이름 db에 저장)
-            // 지출 내역 입력 창 (지출 내역, 지출 액, 지출 일 - 리사이클러 뷰)
-
-        val intent = Intent(requireContext(), PaymentActivity::class.java).apply {
-            putExtra("user", intentUser)
-        }
-        startActivity(intent)
-
-        binding.WarehouseButton.setOnClickListener {
-            val intentUser = User(
-                userId = myprofileLists[0].userId,
-                username = myprofileLists[0].username,
-                email = myprofileLists[0].email,
-                lat = myprofileLists[0].lat,
-                lng = myprofileLists[0].lng,
-                phone = myprofileLists[0].phone,
-                role = myprofileLists[0].role,
-                password = myprofileLists[0].password
-            )
-
-            val intent = Intent(requireContext(), WarehouseActivity::class.java).apply {
-                putExtra("user", intentUser)
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-
-        chartLists = ArrayList<MyChart>().apply {
-            add(MyChart(R.drawable.sales, "내 매출 내역"))
-            add(MyChart(R.drawable.income, "내 수익 내역"))
-            add(MyChart(R.drawable.expense, "내 지출 내역"))
-        }
-
-        mychartAdapter = MyChartAdapter(chartLists)
-        mychartAdapter.setOnItemClickListener(object : MyChartAdapter.OnItemClickListeners {
-            override fun onItemClick(binding: MychartItemBinding, myChart: MyChart, position: Int) {
-                val intentUser = User(
-                    userId = myprofileLists[0].userId,
-                    username = myprofileLists[0].username,
-                    email = myprofileLists[0].email,
-                    lat = myprofileLists[0].lat,
-                    lng = myprofileLists[0].lng,
-                    phone = myprofileLists[0].phone,
-                    role = myprofileLists[0].role,
-                    password = myprofileLists[0].password
-                )
-
-                val intent: Intent = when (position) {
-                    0 -> {
-                        Intent(requireContext(), SalesChartActivity::class.java).apply {
-                            putExtra("user", intentUser)
-                        }
-                    }
-                    1 -> {
-                        Intent(requireContext(), IncomeChartActivity::class.java).apply {
-                            putExtra("user", intentUser)
-                        }
-                    }
-                    2 -> {
-                        Intent(requireContext(), ExpenseChartActivity::class.java).apply {
-                            putExtra("user", intentUser)
-                        }
-                    }
-                    else -> return
-                }
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-        })
-
+        // 차트 리사이클러뷰 설정
         binding.ChartRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.ChartRecyclerView.adapter = mychartAdapter
 
         return view
     }
 
-    /*private fun loadPaymentById(userId: Int) {
-        val call = RetrofitService.paymentService.getPaymentById(userId)
-        call.enqueue(object : Callback<Payment> {
-            override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
-                if (response.isSuccessful) {
-                    val payment = response.body()
-                    return payment.paymentName
-                } else {
-                    Toast.makeText(this@PaymentActivity, "결제 수단을 추가해 주세요", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Payment>, t: Throwable) {
-                Toast.makeText(this@PaymentActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }*/
-
-    // 현재 로그인 한 user 정보 가져 오기
-    private fun fetchUserById(userId: Int) {
+    // 사용자 정보 조회
+    private fun getUserById(userId: Int) {
         val call = RetrofitService.userService.getUserById(userId)
         call.enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val user = response.body()
                     if (user != null) {
+                        // 사용자 목록에 추가하고 어댑터 갱신
                         myprofileLists.add(user)
                         myprofileAdapter.updateData(myprofileLists)
-                        Log.d("MainActivity", "User added to list: $user")
+                        Log.d("MyProfileActivity", "User added to list: $user")
                     } else {
-                        Log.e("MainActivity", "No user data found in response")
+                        Log.e("MyProfileActivity", "No user data found in response")
                     }
                 } else {
-                    Log.e("MainActivity", "Request failed with status: ${response.code()}")
+                    Log.e("MyProfileActivity", "Request failed with status: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e("MainActivity", "Network request failed", t)
+                Log.e("MyProfileActivity", "Network request failed", t)
             }
         })
     }

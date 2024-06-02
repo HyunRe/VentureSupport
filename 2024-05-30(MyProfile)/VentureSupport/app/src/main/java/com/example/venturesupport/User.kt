@@ -1,8 +1,19 @@
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import com.example.venturesupport.UserRole
+import com.google.gson.annotations.SerializedName
 
+/**
+ * 사용자를 나타내는 데이터 클래스입니다.
+ * @property userId 사용자 ID입니다.
+ * @property username 사용자 이름입니다.
+ * @property email 사용자 이메일 주소입니다.
+ * @property lat 사용자의 위도 좌표입니다.
+ * @property lng 사용자의 경도 좌표입니다.
+ * @property phone 사용자 전화번호입니다.
+ * @property role 사용자의 역할(UserRole 열거형)입니다.
+ * @property password 사용자 비밀번호입니다.
+ */
 class User(
     @SerializedName("userId") val userId: Int,
     @SerializedName("username") val username: String,

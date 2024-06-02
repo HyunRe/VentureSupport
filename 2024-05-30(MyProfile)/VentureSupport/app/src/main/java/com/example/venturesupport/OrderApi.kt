@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface OrderApi {
-    @GET("/api/orders")
+    @GET("/orders")
     fun getAllOrders(): Call<List<Order>>
 
     @GET("orders/users/{id}")
