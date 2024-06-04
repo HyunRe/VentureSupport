@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">test2</string>
-    <string name="home">홈</string>
-    <string name="map">지도</string>
-    <string name="scheduler">스케줄러</string>
-    <string name="my_info">내 정보</string>
-</resources>
