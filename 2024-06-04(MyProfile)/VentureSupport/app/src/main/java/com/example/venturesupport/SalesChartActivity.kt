@@ -38,13 +38,18 @@ class SalesChartActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 현재 연도를 가져오기 위한 캘린더 인스턴스
-        val cal = Calendar.getInstance()
+        val cal = Calendar.getInstance() 
         val year = cal.get(Calendar.YEAR)
 
         // 특정 사용자의 결제 및 주문 정보를 로드
-        val userId = 1 // 실제 사용자 ID를 가져와야 함
-        loadPaymentById(userId)
-        loadOrdersByUserId(userId)
+        val userId = intent.getIntExtra("USER_ID", -1)
+        if (userId == -1) {
+            Toast.makeText(this, "유효하지 않은 사용자 ID", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+        loadPaymentById(userId) //결제 정보 관련
+        loadOrdersByUserId(userId) //주문 정보 관련
 
         // 차트에 초기 연도 설정
         binding.yearButton.text = "${year}년"
@@ -133,7 +138,7 @@ class SalesChartActivity : AppCompatActivity() {
         salesChartAdapter.notifyDataSetChanged()
     }
 
-    // 특정 사용자의 결제 정보 로드
+    
     // 특정 사용자의 결제 정보를 로드합니다.
     private fun loadPaymentById(userId: Int) {
         // Retrofit을 사용하여 서버로부터 해당 사용자의 결제 정보를 요청합니다.
