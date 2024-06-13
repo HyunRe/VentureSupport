@@ -11,7 +11,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.sql.Date
 
-class EditOrderActivity: AppCompatActivity() {
+/**
+ * 주문 수정 화면을 위한 액티비티 클래스입니다.
+ */
+class EditOrderActivity : AppCompatActivity() {
+    // 바인딩 변수: 레이아웃과 연결하여 UI 요소에 접근할 수 있도록 합니다.
     private val binding: EditorderBinding by lazy {
         EditorderBinding.inflate(layoutInflater)
     }
@@ -23,13 +27,18 @@ class EditOrderActivity: AppCompatActivity() {
     private lateinit var salary: String
     private lateinit var totalAmount: String
 
+    /**
+     * 액티비티가 생성될 때 호출됩니다.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 인텐트를 통해 전달된 주문 정보를 가져옵니다.
         @Suppress("DEPRECATION")
         editOrder = intent.getParcelableExtra("editOrder")
 
+        // 기존 주문 정보로 뷰를 초기화합니다.
         binding.dateTextView.setText(editOrder?.date.toString(), TextView.BufferType.EDITABLE)
         binding.SupplierNameTextView.setText(editOrder?.supplier?.supplierName, TextView.BufferType.EDITABLE)
         binding.SupplierPhoneNumberTextView.setText(editOrder?.supplier?.supplierPhoneNumber, TextView.BufferType.EDITABLE)
@@ -37,7 +46,9 @@ class EditOrderActivity: AppCompatActivity() {
         binding.SalaryTextView.setText(editOrder?.salary.toString(), TextView.BufferType.EDITABLE)
         binding.TotalAmountTextView.setText(editOrder?.totalAmount.toString(), TextView.BufferType.EDITABLE)
 
+        // 수정 버튼 클릭 리스너 설정
         binding.updateButton.setOnClickListener {
+            // 입력된 값을 가져와서 변수에 저장합니다.
             date = if (binding.date.text.isNullOrEmpty()) {
                 editOrder?.date.toString()
             } else {
@@ -69,7 +80,8 @@ class EditOrderActivity: AppCompatActivity() {
                 binding.TotalAmount.text.toString()
             }
 
-            val supplier = Supplier (
+            // 새로 수정된 주문 객체를 생성합니다.
+            val supplier = Supplier(
                 supplierId = editOrder?.supplier?.supplierId,
                 supplierName = supplier_Name,
                 supplierPhoneNumber = supplier_PhoneNumber,
@@ -87,7 +99,10 @@ class EditOrderActivity: AppCompatActivity() {
                 totalAmount = totalAmount.toInt()
             )
 
+            // 주문을 업데이트하는 네트워크 요청을 보냅니다.
             updateOrder(order)
+
+            // 업데이트된 주문 정보를 전달하고 MyOrderlistActivity로 이동합니다.
             val intent = Intent(this, MyOrderlistActivity::class.java)
             intent.putExtra("intentOrder", order)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -96,6 +111,10 @@ class EditOrderActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * 주문을 업데이트하는 네트워크 요청을 보내는 함수입니다.
+     * @param order Order - 수정할 주문 정보
+     */
     private fun updateOrder(order: Order) {
         val call = RetrofitService.orderService.updateOrder(editOrder?.orderId!!, order)
         call.enqueue(object : Callback<Order> {
@@ -103,7 +122,7 @@ class EditOrderActivity: AppCompatActivity() {
                 if (response.isSuccessful) {
                     val updatedOrder = response.body()
                     if (updatedOrder != null) {
-                        // 업데이트된 주문 데이터를 처리함
+                        // 업데이트된 주문 데이터를 로그로 출력합니다.
                         Log.d("EditOrderActivity", "Order updated successfully: $updatedOrder")
                     } else {
                         Log.e("EditOrderActivity", "Failed to update order: No response body")

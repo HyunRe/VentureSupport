@@ -12,22 +12,22 @@ import retrofit2.http.Path
 interface ExpenseApi {
 
         // 모든 지출 정보를 가져오는 GET 요청
-        @GET("/api/expenses")
+        @GET("expenses")
         fun getAllExpenses(): Call<List<Expense>>
 
-        // 특정 유저 ID의 지출 정보를 가져오는 GET 요청
-        @GET("/api/expenses/{id}")
+        // 해당 ID의 지출 정보를 가져오는 GET 요청
+        @GET("expenses/{id}")
         fun getExpenseById(@Path("id") id: Int): Call<Expense>
 
         // 새로운 지출 정보를 생성하는 POST 요청
-        @POST("/api/expenses")
+        @POST("expenses")
         fun createExpense(@Body expense: Expense): Call<Expense>
 
         // 특정 ID의 지출 정보를 업데이트하는 PUT 요청
-        @PUT("/api/expenses/{id}")
+        @PUT("expenses/{id}")
         fun updateExpense(@Path("id") id: Int, @Body expense: Expense): Call<Expense>
 
         // 특정 ID의 지출 정보를 삭제하는 DELETE 요청
-        @DELETE("/api/expenses/{id}")
+        @DELETE("expenses/{id}")
         fun deleteExpense(@Path("id") id: Int): Call<Void>
 }

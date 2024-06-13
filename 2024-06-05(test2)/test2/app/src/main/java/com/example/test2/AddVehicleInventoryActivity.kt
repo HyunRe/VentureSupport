@@ -1,5 +1,6 @@
 package com.example.test2
 
+import Product
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ class AddVehicleInventoryActivity: AppCompatActivity() {
     private val binding: AddvehicleinventoryBinding by lazy {
         AddvehicleinventoryBinding.inflate(layoutInflater)
     }
+    // 인텐트에서 전달된 Order 객체와 User 객체를 저장
     private var intentOrder: Order? = null
     private var intentUser: User? = null
 
@@ -27,6 +29,7 @@ class AddVehicleInventoryActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 인텐트로부터 Order와 User 객체를 가져오기
         @Suppress("DEPRECATION")
         intentOrder = intent.getParcelableExtra("intentOrder")
         @Suppress("DEPRECATION")
@@ -34,19 +37,23 @@ class AddVehicleInventoryActivity: AppCompatActivity() {
 
         // 수정 필요
         binding.checkButton.setOnClickListener {
+            // 사용자가 입력한 제품 정보 가져오기
             val productNameEdit = binding.productNameEdit.text.toString()
             val productQuantityEdit = binding.productQuantityEdit.text.toString()
-            val productPriceEdit = binding.productPriceEdit.text.toString()
+            //val productPriceEdit = binding.productPriceEdit.text.toString()
 
+            // 제품 객체 생성
             val product = Product(
                 productId = null,
                 productName = productNameEdit,
-                productPrice = productPriceEdit.toDouble(),
+                productPrice = null, //productPriceEdit.toDouble(),
                 productQuantity = productQuantityEdit
             )
 
+
             createProduct(product)
 
+            // 제품 정보를 다음 액티비티로 전달하고 종료
             val intent = Intent(this, CreateOrderActivity::class.java)
             intent.putExtra("intentProduct", product)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

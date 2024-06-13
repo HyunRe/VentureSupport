@@ -12,14 +12,14 @@ import retrofit2.http.Path
 interface PaymentApi {
 
     // 모든 결제 수단 가져오기
-    @GET("/api/payments")
+    @GET("payments")
     fun getAllPayments(): Call<List<Payment>>
 
     // ID에 해당하는 결제 수단 가져오기
-    @GET("/api/payments/{id}")
+    @GET("payments/{id}")
     fun getPaymentById(@Path("id") id: Int): Call<Payment>
 
     // 새로운 결제 수단 생성
-    @POST("/api/payments")
+    @POST("payments")
     fun createPayment(@Body payment: Payment): Call<Payment>
 }

@@ -73,7 +73,7 @@ class PaymentActivity : AppCompatActivity() {
 
     private fun loadMyPayment(user: User) {
     // 내 기존 결제 정보를 화면에 표시하는 API 호출
-        val call = RetrofitService.paymentService.getPaymentById(user.id)
+        val call = RetrofitService.paymentService.getPaymentById(user.userId)
         call.enqueue(object : Callback<Payment> {
             override fun onResponse(call: Call<Payment>, response: Response<Payment>) {
                 if (response.isSuccessful) { // 서버 응답이 성공적으로 수신된 경우
@@ -83,17 +83,17 @@ class PaymentActivity : AppCompatActivity() {
                     //paymentAdapter.setData(listOf(payment)) // 결제 정보를 RecyclerView에
                 } else {
                     // 서버 응답이 실패한 경우 에러 메시지를 사용자에게 표시합니다.
-                    Toast.makeText(this@SalesChartActivity, "결제 수단 조회 실패", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this@PaymentActivity, "결제 수단 조회 실패",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
-        }
 
-        override fun onFailure(call: Call<Payment>, t: Throwable) {
-            Log.e("PaymentActivity", "네트워크 오류", t) // 네트워크 오류 로그 출력
-            // 사용자에게 알림
-            Toast.makeText(this@PaymentActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
-        }
+            override fun onFailure(call: Call<Payment>, t: Throwable) {
+                Log.e("PaymentActivity", "네트워크 오류", t) // 네트워크 오류 로그 출력
+                // 사용자에게 알림
+                Toast.makeText(this@PaymentActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -101,10 +101,6 @@ class PaymentActivity : AppCompatActivity() {
      * 결제 정보를 서버에 저장하는 메서드입니다.
      * @param payment Payment - 저장할 결제 정보
      */
-    /**
- * 결제 정보를 서버에 저장하는 메서드입니다.
- * @param payment Payment - 저장할 결제 정보
- */
     private fun savePayment(payment: Payment) {
     // 결제 정보를 서버에 저장하는 API 호출
         val call = RetrofitService.paymentService.createPayment(payment)
