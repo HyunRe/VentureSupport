@@ -26,32 +26,33 @@ import java.io.IOException
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClickListener {
 
-    private lateinit var naverMap: NaverMap
-    private lateinit var locationSource: FusedLocationSource
-    private lateinit var mapView: MapView
-    private val polylines = mutableListOf<PolylineOverlay>()
-    private val clientId = "5gp8c3chqt"
-    private val clientSecret = "OZt0kZU48KJrSXvhDpgafwJe7Jucu8ilfdc5cGHG"
-    private val LOCATION_PERMISSION_REQUEST_CODE = 1000
+    private lateinit var naverMap: NaverMap  // 네이버 맵 객체
+    private lateinit var locationSource: FusedLocationSource   // 현재 위치를 제공하는 소스 객체
+    private lateinit var mapView: MapView  // 지도 뷰 객체
+    private val polylines = mutableListOf<PolylineOverlay>()  // 경로 오버레이 리스트: 지도에 표시된 경로를 저장하는 리스트
+    private val clientId = "5gp8c3chqt"  // 네이버 API 클라이언트 ID
+    private val clientSecret = "OZt0kZU48KJrSXvhDpgafwJe7Jucu8ilfdc5cGHG"  // 네이버 API 클라이언트 시크릿
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1000  // 위치 권한 요청 코드
 
     private val warehouseAddresses = listOf(
         "서울특별시 강남구 테헤란로 123",
         "서울특별시 종로구 혜화로 24",
         "서울특별시 마포구 월드컵로10길 50"
-    )
+    )// 창고 주소 리스트
 
-    private var currentLocation: LatLng? = null
+    private var currentLocation: LatLng? = null // 현재 위치 변수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.map)
-
+        // 위치 소스 초기화
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
+        // 지도 뷰 초기화 및 생성
         mapView = findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
 
+        // 위치 권한 요청
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -67,14 +68,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
             showDeleteConfirmationDialog()
         }
     }
-
+    /**
+     * 지도 준비 완료 시 호출됩니다.
+     */
     override fun onMapReady(naverMap: NaverMap) {
         this.naverMap = naverMap
-        naverMap.setOnMapClickListener(this) // 맵 클릭 리스너 설정
-
+        naverMap.setOnMapClickListener(this) // 맵 클릭 리스너 설정: 초기 지도 화면 출력 함수 호출
+        // 위치 권한이 허용된 경우, 현재 위치를 가져와서 지도에 표시합니다.
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getLastLocation { currentLatLng ->
+            getLastLocation { currentLatLng -> //최근위치 확보
                 currentLatLng?.let {
                     currentLocation = it // 초기 위치 설정
                     val currentLocationMarker = Marker()
@@ -84,18 +87,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
                 }
             }
         }
-
+        // 카메라를 현재 위치로 이동
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getLastLocation { currentLatLng ->
+            getLastLocation { currentLatLng ->// 최근위치 확보
                 currentLatLng?.let {
                     currentLocation = it // 초기 위치 설정
-                    val cameraUpdate = CameraUpdate.scrollTo(it)
+                    val cameraUpdate = CameraUpdate.scrollTo(it) //갱신된 이용자 (이동 시) 현재 위치값 저장 변수
                     naverMap.moveCamera(cameraUpdate)
                 }
             }
         }
 
+        // 주소 리스트를 순회하면서 마커를 추가합니다.
         val addresses = listOf(
             "서울특별시 성북구 삼선교로16길 116",
             "서울특별시 노원구 동일로 1414",
@@ -104,6 +108,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
             "서울특별시 광진구 능동로 216"
         )
 
+        // 각 주소에 대해 마커를 추가
         addresses.forEach { address ->
             getLatLngFromAddress(address) { latLng ->
                 latLng?.let {
@@ -112,6 +117,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
             }
         }
 
+        // 창고 주소에 대해 마커를 추가
         warehouseAddresses.forEach { address ->
             getLatLngFromAddress(address) { latLng ->
                 latLng?.let {
@@ -121,6 +127,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         }
     }
 
+    /**
+     * 지도에 마커를 추가합니다.
+     */
     private fun addMarker(latLng: LatLng, address: String, iconResId: Int, pathColor: Int) {
         val marker = Marker()
         marker.position = latLng
@@ -139,15 +148,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         }
     }
 
+    /**
+     * 마지막 위치를 가져옵니다.
+     */
     private fun getLastLocation(callback: (LatLng?) -> Unit) {
+        // 위치 권한이 허용된 경우
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             val locationManager = getSystemService(LOCATION_SERVICE) as android.location.LocationManager
+            // GPS와 네트워크의 활성화 상태 확인
             val isGpsEnabled = locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)
             val isNetworkEnabled = locationManager.isProviderEnabled(android.location.LocationManager.NETWORK_PROVIDER)
 
             var location: Location? = null
+            // GPS 또는 네트워크가 활성화된 경우 위치를 가져옴
             if (isGpsEnabled || isNetworkEnabled) {
                 if (isGpsEnabled) {
                     location = locationManager.getLastKnownLocation(android.location.LocationManager.GPS_PROVIDER)
@@ -155,6 +170,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
                 if (isNetworkEnabled && location == null) {
                     location = locationManager.getLastKnownLocation(android.location.LocationManager.NETWORK_PROVIDER)
                 }
+                // 위치 정보를 LatLng 객체로 변환하여 콜백 함수 호출
                 location?.let {
                     val latLng = LatLng(it.latitude, it.longitude)
                     callback(latLng)
@@ -167,6 +183,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         }
     }
 
+    /**
+     * 경로 요청 URL을 생성합니다.
+     */
     private fun getDirectionsUrl(startLatLng: LatLng, endLatLng: LatLng): String {
         return "https://naveropenapi.apigw.ntruss.com/map-direction/v1/driving" +
                 "?start=${startLatLng.longitude},${startLatLng.latitude}" +
@@ -174,6 +193,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
                 "&option=trafast"
     }
 
+    /**
+     * 경로를 요청합니다.
+     */
     private fun getDirections(startLatLng: LatLng, endLatLng: LatLng, callback: (List<LatLng>?) -> Unit) {
         val url = getDirectionsUrl(startLatLng, endLatLng)
         val request = Request.Builder()
@@ -218,6 +240,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         })
     }
 
+    /**
+     * 지도에 경로를 그립니다.
+     */
     private fun drawPath(path: List<LatLng>, color: Int) {
         runOnUiThread {
             val polylineOverlay = PolylineOverlay()
@@ -228,7 +253,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
             polylines.add(polylineOverlay)
         }
     }
-
+    /**
+     * 주소로부터 위도, 경도 정보를 가져옵니다.
+     */
     private fun getLatLngFromAddress(address: String, callback: (LatLng?) -> Unit) {
         val url = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=$address"
         val request = Request.Builder()
@@ -265,6 +292,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
             }
         })
     }
+    /**
+     * 경로 삭제 확인 다이얼로그를 표시합니다.
+     */
     private fun showDeleteConfirmationDialog() {
         AlertDialog.Builder(this)
             .setTitle("경로 삭제")
@@ -276,6 +306,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
             .show()
     }
 
+    /**
+     * 모든 경로를 삭제합니다.
+     */
     private fun clearAllPaths() {
         runOnUiThread {
             polylines.forEach { it.map = null }
@@ -283,6 +316,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         }
     }
 
+    /**
+     * 지도 클릭 시 호출됩니다.
+     */
     override fun onMapClick(pointF: PointF, latLng: LatLng) {
         currentLocation = latLng // 클릭된 위치를 현재 위치로 업데이트
         val currentLocationMarker = Marker()
@@ -290,7 +326,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         currentLocationMarker.icon = OverlayImage.fromResource(R.drawable.marker_mylocation)
         currentLocationMarker.map = naverMap
 
-        // 이전 위치와 현재 위치 간의 경로를 그림
+        // 이전 위치와 현재 위치 간의 경로를 선으로 그림
+        /*getDirections를 통해 path에 해당하는 위치들의 위경도값을 얻어, 선을 그을 drawPath로 전달
+        * */
         currentLocation?.let { currentLatLng ->
             getDirections(currentLatLng, latLng) { path ->
                 path?.let {
@@ -300,6 +338,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         }
     }
 
+    /**
+     * 권한 요청 결과를 처리합니다.
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
@@ -314,6 +355,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, NaverMap.OnMapClick
         }
     }
 
+    // 액티비티 생명주기 메서드
     override fun onStart() {
         super.onStart()
         mapView.onStart()

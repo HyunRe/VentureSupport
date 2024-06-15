@@ -41,13 +41,13 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // DrawerLayout
-    implementation("androidx.drawerlayout:drawerlayout:1.1.1")
+    implementation("androidx.drawerlayout:drawerlayout:1.2.0")
 
     // Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.6.0")
@@ -63,8 +63,13 @@ dependencies {
     // MPAndroidChart
     // implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("androidx.room:room-runtime-android:2.7.0-alpha02")
+    implementation("com.naver.maps:map-sdk:3.14.0")
+    implementation("com.google.android.gms:play-services-location:18.0.0")
+    implementation("androidx.tracing:tracing-perfetto-handshake:1.0.0")
+    implementation("androidx.cardview:cardview:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }

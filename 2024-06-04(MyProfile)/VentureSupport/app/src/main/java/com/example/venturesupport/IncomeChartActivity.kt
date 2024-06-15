@@ -62,7 +62,7 @@ class IncomeChartActivity : AppCompatActivity() {
 
     // 사용자 ID를 이용해 서버에서 오더 내역을 로드하는 함수
     private fun getOrderByUserId(userId: Int) {
-        val call = RetrofitService.orderService.getOrderByUserId(userId)
+        val call = RetrofitService.orderService.getOrdersByUserId(userId)
         call.enqueue(object : Callback<List<Order>> {
             // 서버 응답이 성공적일 때 호출되는 함수
             override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {

@@ -1,13 +1,11 @@
 package com.example.venturesupport
 
 import android.content.Intent
-import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.venturesupport.RetrofitService.orderService
 import com.example.venturesupport.databinding.SaleschartBinding
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -41,15 +39,15 @@ class SalesChartActivity : AppCompatActivity() {
         val cal = Calendar.getInstance() 
         val year = cal.get(Calendar.YEAR)
 
-        // 특정 사용자의 결제 및 주문 정보를 로드
+        // 기존 인텐트에 입력된 특정 사용자의 ID를 바탕으로 결제 및 주문 정보를 로드&판매 정보를 업데이트해 막대 차트 설정
+
         val userId = intent.getIntExtra("USER_ID", -1)
         if (userId == -1) {
             Toast.makeText(this, "유효하지 않은 사용자 ID", Toast.LENGTH_SHORT).show()
             finish()
             return
         }
-        loadPaymentById(userId) //결제 정보 관련
-        loadOrdersByUserId(userId) //주문 정보 관련
+
 
         // 차트에 초기 연도 설정
         binding.yearButton.text = "${year}년"
@@ -65,8 +63,8 @@ class SalesChartActivity : AppCompatActivity() {
         }
 
         // 초기값 설정: 수입 및 지출 버튼
-        binding.incomeButton.text = "345083원"
-        binding.expenseButton.text = "250267원"
+        //binding.incomeButton.text = "345083원"
+        //binding.expenseButton.text = "250267원"
 
         // 수입 버튼 클릭 처리
         binding.incomeButton.setOnClickListener {
@@ -103,7 +101,8 @@ class SalesChartActivity : AppCompatActivity() {
         /*먼저 사용할 라벨을 배열로 정의하고, 그 후에는 labelCount를 사용하여 라벨 개수를 설정.
         setGranularity는 간격을 설정하는데, 여기서는 각 라벨 사이의 간격을 1로 설정.
         그리고 valueFormatter를 사용하여 X축 값의 포맷을 설정.
-        이 때, ValueFormatter의 getAxisLabel 함수를 오버라이드하여 실제 값에 해당하는 라벨을 반환. 마지막으로 X축의 위치를 설정*/
+        이 때, ValueFormatter의 getAxisLabel 함수를 오버라이드하여 실제 값에 해당하는 라벨을 반환.
+        마지막으로 X축의 위치를 설정*/
 
         // X축에 표시될 라벨 배열
         val labels = arrayOf(
@@ -136,10 +135,14 @@ class SalesChartActivity : AppCompatActivity() {
         binding.salesRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.salesRecyclerView.adapter = salesChartAdapter
         salesChartAdapter.notifyDataSetChanged()
+
+        loadPaymentById(userId) //결제 정보 관련
+        loadOrdersByUserId(userId) //주문 정보 관련: 함수 내에서 updateBarChart(it) updateSalesTextView(it)
+        //를 써서 막대 차트와 판매 정보를 업데이트합니다.
     }
 
     
-    // 특정 사용자의 결제 정보를 로드합니다.
+    // 특정 사용자 ID를 바탕으로 결제 정보를 로드합니다.
     private fun loadPaymentById(userId: Int) {
         // Retrofit을 사용하여 서버로부터 해당 사용자의 결제 정보를 요청합니다.
         val call = RetrofitService.paymentService.getPaymentById(userId)
@@ -164,10 +167,10 @@ class SalesChartActivity : AppCompatActivity() {
         })
     }
 
-    // 특정 사용자의 주문 정보를 로드합니다.
+    // 특정 사용자의 ID를 바탕으로 주문 정보를 로드합니다.
     private fun loadOrdersByUserId(userId: Int) {
         // Retrofit을 사용하여 서버로부터 해당 사용자의 주문 정보를 요청합니다.
-        val call = RetrofitService.orderService.getOrderByUserId(userId)
+        val call = RetrofitService.orderService.getOrdersByUserId(userId)
         call.enqueue(object : Callback<List<Order>> {
             override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                 // 서버 응답이 성공적으로 수신된 경우
@@ -194,19 +197,19 @@ class SalesChartActivity : AppCompatActivity() {
 
     // 막대 차트를 업데이트합니다.
     private fun updateBarChart(orders: List<Order>) {
-        val entriesForeground = ArrayList<BarEntry>()
-        val monthlyTotals = FloatArray(12) { 0f }
+        val entriesForeground = ArrayList<BarEntry>() //막대차트 값 설정
+        val monthlyTotals = FloatArray(12) { 0f } //월별 총계 저장 변수
 
         // 각 월별 매출 합계를 계산합니다.
-        for (order in orders) {
-            val calendar = Calendar.getInstance().apply {
+        for (order in orders) { //오더로부터 정보 가져오기
+            val calendar = Calendar.getInstance().apply { //캘린더에서 날짜 정보 가져오기
                 time = order.date
             }
-            val month = calendar.get(Calendar.MONTH)
+            val month = calendar.get(Calendar.MONTH) //해당 개월 수
             monthlyTotals[month] += order.totalAmount.toFloat()
         }
 
-        // 막대 차트에 표시될 데이터를 추가합니다.
+        // 막대 차트에 표시될 월별 데이터를 추가합니다.
         for (i in monthlyTotals.indices) {
             entriesForeground.add(BarEntry((i + 1).toFloat(), monthlyTotals[i]))
         }

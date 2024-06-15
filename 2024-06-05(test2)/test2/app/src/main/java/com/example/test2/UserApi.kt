@@ -14,6 +14,6 @@ interface UserApi {
     @PUT("users/{id}")
     fun updateUser(@Path("id") id: Int, @Body user: User): Call<ResponseBody>
 
-    @GET("users")
+    @GET("users") //모든 유저 정보 획득
     fun getAllUsers(): Call<List<User>>
 }

@@ -7,25 +7,31 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.test2.RetrofitService.authService
 import com.example.test2.databinding.LoginBinding
+import com.example.venturesupport.CreateOrderActivity
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * 로그인 화면 Activity입니다.
+ * 사용자가 로그인 정보를 입력하고, 선택한 역할에 따라 로그인 기능을 수행합니다.
+ */
 class LoginActivity: AppCompatActivity() {
     private val binding: LoginBinding by lazy {
         LoginBinding.inflate(layoutInflater)
     }
-    private var selectedRole: UserRole? = null
-    private var userEmail: String = ""
-    private var password: String = ""
-    private var intentUser: User? = null
-    private var intentCompany: Company? = null
+    private var selectedRole: UserRole? = null  // 선택된 사용자 역할
+    private var userEmail: String = ""  // 사용자 이메일
+    private var password: String = ""  // 사용자 비밀번호
+    private var intentUser: User? = null  // 로그인한 사용자 정보
+    private var intentCompany: Company? = null  // 로그인한 회사 정보
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 라디오 버튼 클릭 리스너 설정
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
             selectedRole = when (checkedId) {
                 binding.radioButtonCompany.id -> UserRole.COMPANY
@@ -38,10 +44,12 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
+        // 로그인 버튼 클릭 리스너 설정
         binding.btnlogin.setOnClickListener {
             userEmail = binding.email.text.toString()
             password = binding.password.text.toString()
 
+            // 사용자 또는 회사 객체 생성
             val user = User(
                 userId = null,
                 username = null,
@@ -60,6 +68,7 @@ class LoginActivity: AppCompatActivity() {
                 companyPassword = password
             )
 
+            // 선택한 역할에 따라 로그인 메서드 호출
             if (selectedRole == UserRole.DRIVER) {
                 fetchAllUsers(object : FetchAllUsersCallback {
                     override fun onFetchComplete() {
@@ -75,6 +84,7 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
+        // 회원가입 버튼 클릭 리스너 설정
         binding.btnregister.setOnClickListener {
             val intent = Intent(this, LogintoResisterActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -82,6 +92,10 @@ class LoginActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * 사용자 로그인 메서드입니다.
+     * @param user User - 로그인할 사용자 객체
+     */
     private fun loginUser(user: User) {
         val call = authService.loginUser(user)
         call.enqueue(object : Callback<ResponseBody> {
@@ -107,6 +121,10 @@ class LoginActivity: AppCompatActivity() {
         })
     }
 
+    /**
+     * 회사 로그인 메서드입니다.
+     * @param company Company - 로그인할 회사 객체
+     */
     private fun loginCompany(company: Company) {
         val call = authService.loginCompany(company)
         call.enqueue(object : Callback<ResponseBody> {
@@ -132,6 +150,10 @@ class LoginActivity: AppCompatActivity() {
         })
     }
 
+    /**
+     * 모든 사용자 정보를 가져오는 메서드입니다.
+     * @param callback FetchAllUsersCallback - 콜백 인터페이스
+     */
     private fun fetchAllUsers(callback: FetchAllUsersCallback) {
         val call = RetrofitService.userService.getAllUsers()
         call.enqueue(object : Callback<List<User>> {
@@ -141,13 +163,11 @@ class LoginActivity: AppCompatActivity() {
                     if (userList != null) {
                         for (user in userList) {
                             if (user.email == userEmail) { // 이메일이 일치하는 사용자를 찾습니다.
-                                // 사용자 정보를 저장하거나 필요한 작업을 수행합니다.
                                 saveUser(user)
                                 break // 이메일이 일치하는 사용자를 찾았으면 반복문 종료
                             }
                         }
-                        // userList를 사용하여 원하는 작업을 수행합니다.
-                        callback.onFetchComplete() // fetchAllUsers가 완료되었음을 알립니다.
+                        callback.onFetchComplete()
                     } else {
                         Log.e("MainActivity", "No user data found in response")
                     }
@@ -162,6 +182,10 @@ class LoginActivity: AppCompatActivity() {
         })
     }
 
+    /**
+     * 모든 회사 정보를 가져오는 메서드입니다.
+     * @param callback FetchAllCompaniesCallback - 콜백 인터페이스
+     */
     private fun fetchAllCompanies(callback: FetchAllCompaniesCallback) {
         val call = RetrofitService.companyService.getAllCompanies()
         call.enqueue(object : Callback<List<Company>> {
@@ -171,15 +195,13 @@ class LoginActivity: AppCompatActivity() {
                     if (companyList != null) {
                         for (company in companyList) {
                             if (company.companyEmail == userEmail) { // 이메일이 일치하는 사용자를 찾습니다.
-                                // 사용자 정보를 저장하거나 필요한 작업을 수행합니다.
                                 saveCompany(company)
                                 break // 이메일이 일치하는 사용자를 찾았으면 반복문 종료
                             }
                         }
-                        // userList를 사용하여 원하는 작업을 수행합니다.
-                        callback.onFetchComplete() // fetchAllUsers가 완료되었음을 알립니다.
+                        callback.onFetchComplete()
                     } else {
-                        Log.e("MainActivity", "No user data found in response")
+                        Log.e("MainActivity", "No company data found in response")
                     }
                 } else {
                     Log.e("MainActivity", "Request failed with status: ${response.code()}")
@@ -192,20 +214,33 @@ class LoginActivity: AppCompatActivity() {
         })
     }
 
+    /**
+     * 사용자 정보를 처리하는 콜백 인터페이스입니다.
+     */
     interface FetchAllUsersCallback {
         fun onFetchComplete()
     }
 
+    /**
+     * 회사 정보를 처리하는 콜백 인터페이스입니다.
+     */
     interface FetchAllCompaniesCallback {
         fun onFetchComplete()
     }
 
+    /**
+     * 사용자 정보를 저장합니다.
+     * @param user User - 저장할 사용자 객체
+     */
     private fun saveUser(user: User) {
         intentUser = user
     }
 
+    /**
+     * 회사 정보를 저장합니다.
+     * @param company Company - 저장할 회사 객체
+     */
     private fun saveCompany(company: Company) {
         intentCompany = company
     }
 }
-

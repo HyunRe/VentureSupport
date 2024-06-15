@@ -40,7 +40,7 @@ class WarehouseRegistrationActivity: AppCompatActivity() {
                 warehouseLocation = warehouseLocation // 사용자가 입력한 창고 위치
             )
 
-            // 서버에 창고 등록 요청
+            // 서버에 창고 등록 요청 함수 사용
             createWarehouse(warehouse)
 
             // WarehouseActivity로 돌아가는 Intent 생성
@@ -55,7 +55,7 @@ class WarehouseRegistrationActivity: AppCompatActivity() {
 
     // 서버에 새로운 창고 생성 요청
     private fun createWarehouse(warehouse: Warehouse) {
-        // RetrofitService를 통해 createWarehouse API 호출
+        // RetrofitService를 통해 createWarehouse(새로운 창고 테이블 생성) API 호출
         val call = RetrofitService.warehouseService.createWarehouse(warehouse)
         call.enqueue(object : Callback<Warehouse> {
             override fun onResponse(call: Call<Warehouse>, response: Response<Warehouse>) {

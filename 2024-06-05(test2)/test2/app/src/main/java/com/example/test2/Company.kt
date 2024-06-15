@@ -4,6 +4,14 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+/**
+ * 회사 정보를 표현하는 데이터 클래스입니다.
+ * @property companyId Int? - 회사의 고유 식별자
+ * @property companyName String - 회사 이름
+ * @property companyEmail String? - 회사 이메일
+ * @property companyPhoneNumber String - 회사 전화번호
+ * @property companyPassword String? - 회사 비밀번호
+ */
 data class Company(
     @SerializedName("companyId") val companyId: Int?,
     @SerializedName("companyName") val companyName: String,

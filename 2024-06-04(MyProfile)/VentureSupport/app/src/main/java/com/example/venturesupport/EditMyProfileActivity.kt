@@ -24,10 +24,10 @@ class EditMyProfileActivity: AppCompatActivity() {
     private var user: User? = null
 
     // 사용자 입력 값을 저장할 변수
-    private lateinit var email: String
-    private lateinit var name: String
-    private lateinit var phoneNumber: String
-    private lateinit var password: String
+    private lateinit var email: String //이메일
+    private lateinit var name: String //이름
+    private lateinit var phoneNumber: String //폰 번호
+    private lateinit var password: String //비번
     private lateinit var confirmPassword: String //확인용 비번
 
     // onCreate 함수: 액티비티 생성 시 호출되며, 초기 설정을 담당
@@ -39,7 +39,7 @@ class EditMyProfileActivity: AppCompatActivity() {
         @Suppress("DEPRECATION")
         user = intent.getParcelableExtra("user")
 
-        // 바인딩된 UI 요소에 사용자 정보 설정
+        // 바인딩된 UI 요소에 EditTxt로 입력받을 사용자 정보 설정
         binding.userEmailText.setText(user?.email, TextView.BufferType.EDITABLE)
         binding.userNameText.setText(user?.username, TextView.BufferType.EDITABLE)
         binding.userPhoneNumberText.setText(user?.phone, TextView.BufferType.EDITABLE)
@@ -80,12 +80,12 @@ class EditMyProfileActivity: AppCompatActivity() {
                 binding.userPassword2.text.toString()
             }
 
-            // 비밀번호 확인
+            // 비밀번호 확인: 비번, 확인용 비번
             if (password == confirmPassword) {
-                // 비밀번호가 일치하면 사용자 정보 갱신
+                // 비밀번호가 일치하면 상기한대로 UI를 통해 입력받은 사용자 정보 갱신
                 updateUserInfo(id, email, name, phoneNumber, password, latitude, longitude, role)
                 val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 새로운 태스크로 액티비티 시작
                 startActivity(intent)
                 finish() // 현재 액티비티 종료
             } else {

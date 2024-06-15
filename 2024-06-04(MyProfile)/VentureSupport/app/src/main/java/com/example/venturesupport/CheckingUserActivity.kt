@@ -24,9 +24,9 @@ class CheckingUserActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root) // 액티비티의 뷰를 설정
 
-        // 사용자 정보를 인텐트에서 가져옴 (이전 API 사용으로 경고 억제)
+        // 사용자 정보를 인텐트에서 가져옴 (@Supress는 이전 API 사용으로 경고 억제)
         @Suppress("DEPRECATION")
-        user = intent.getParcelableExtra("user")
+        user = intent.getParcelableExtra("user") //파서로 유저 데이터 클래스 사용
 
         // 로그인 확인 버튼에 클릭 리스너 설정
         binding.checkButton.setOnClickListener {
@@ -41,7 +41,7 @@ class CheckingUserActivity: AppCompatActivity() {
                     putExtra("user", user) // 사용자 정보를 인텐트에 추가
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 새로운 태스크로 액티비티 시작
                 }
-                startActivity(intent) //시작 선언문(인텐트 내 유저 정보 바탄)
+                startActivity(intent) //시작 선언문(인텐트 내 유저 정보 바탕)
                 finish() // 현재 액티비티 종료
             } else {
                 // 일치하지 않으면 오류 메시지(유저 표시 토스트) 출력 및 오류 다이얼로그 표시
