@@ -62,6 +62,11 @@
 
 
 네이버 연동 로그인
+<figure class="thrid"> 
+  <a href="link"><img src="![다양한 로그인 지원](https://github.com/HyunRe/VentureSupport/assets/130357067/2169515e-7863-4e46-b5d4-21c79602670f)"></a> 
+  <a href="link"><img src="![로그인](https://github.com/HyunRe/VentureSupport/assets/130357067/ccd97f55-1890-44ec-9988-687549f09f5e)"></a>
+  <a href="link"><img src="![네이버 로그인](https://github.com/HyunRe/VentureSupport/assets/130357067/a0052200-c456-41d2-a516-07a94508fc00)"></a>
+<figcaption>자체로그인 네이버 연동 로그인</figcaption></figure>
 
 로그인 후 이용자 업종에 최적화된 서로 다른 기능을 지원한다.
 
