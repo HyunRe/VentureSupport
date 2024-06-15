@@ -41,8 +41,8 @@
 
 - **이용자 선택 UI**
  
-![회원가입](https://github.com/HyunRe/VentureSupport/assets/130357067/e5381773-68d1-4d45-8a2e-57508acd0f1a)
-
+<img src=https://github.com/HyunRe/VentureSupport/assets/130357067/e5381773-68d1-4d45-8a2e-57508acd0f1a) width="33%" height="33%"></a> 
+ <figcaption>회원가입</figcaption></figure>
 
 이용자의 업종을 선택할 수 있는 화면
 
@@ -74,10 +74,10 @@
 - **홈 UI**
 
 <figure class="thrid"> 
-  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2 width="30%" height="30%"></a> 
-<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56 width="30%" height="30%"></a> 
-<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae width="30%" height="30%"></a> 
-<figcaption>                공고된 물류 운송 건   선택한 물류 운송 건    선택된 모든 물류 운송 목록</figcaption></figure>
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2 width="33%" height="30%"></a> 
+<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56 width="33%" height="30%"></a> 
+<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae width="33%" height="30%"></a> 
+<figcaption>공고된 물류 운송 건 | 선택한 물류 운송 건 | 선택된 모든 물류 운송 목록</figcaption></figure>
 
 
 공고된 운송 건을 보고 선택할 수 있는 홈 화면
@@ -86,12 +86,10 @@
 
 
 - **지도 UI**
-
-![내 창고 위치](https://github.com/HyunRe/VentureSupport/assets/130357067/0c5f7858-fd08-4310-b3e9-ab4119b0b87e)
-
-창고 위치
-
-![지도](https://github.com/HyunRe/VentureSupport/assets/130357067/c67826dd-c06c-44cb-a86e-b8b5d514857f)
+<figure class="half"> 
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/0c5f7858-fd08-4310-b3e9-ab4119b0b87e width="33%" height="33%"></a> 
+<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/c67826dd-c06c-44cb-a86e-b8b5d514857f width="33%" height="33%"></a> 
+<figcaption>내 창고 위치 | 지도 화면</figcaption></figure>
 
 운송기사가 운송 동선을 계획할 수 있는 지도 화면
 
@@ -100,7 +98,7 @@
 
 - **스케줄러 UI**
 
-![스케줄러](https://github.com/HyunRe/VentureSupport/assets/130357067/aec60ac0-48f1-438b-a230-901af99590bf)
+<img src=https://github.com/HyunRe/VentureSupport/assets/130357067/aec60ac0-48f1-438b-a230-901af99590bf width="33%" height="33%"></a> 
 
 
 운송기사가 계획한한 운송 동선에 따라 보여지는 스케줄러 화면
