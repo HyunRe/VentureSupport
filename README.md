@@ -77,7 +77,7 @@
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2 width="33%" height="30%"></a> 
 <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56 width="33%" height="30%"></a> 
 <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae width="33%" height="30%"></a> 
-<figcaption>공고된 물류 운송 건 | 선택한 물류 운송 건 | 선택된 모든 물류 운송 목록</figcaption></figure>
+<figcaption>공고된 물류 운송 건    |    선택한 물류 운송 건    |    선택된 모든 물류 운송 목록</figcaption></figure>
 
 
 공고된 운송 건을 보고 선택할 수 있는 홈 화면
@@ -109,41 +109,31 @@
 
 - **내 정보 UI**
 
-![내프로필](https://github.com/HyunRe/VentureSupport/assets/130357067/76d43518-feb9-4de8-be4c-8199ee1539df)
-
-내 프로필
-
-![프로필 관리](https://github.com/HyunRe/VentureSupport/assets/130357067/81b8e9c6-2425-4fdc-989a-eb74ddfabd33)
-
-내 프로필 관리
-
-![프로필 수정](https://github.com/HyunRe/VentureSupport/assets/130357067/5a108839-3009-438e-9f13-bc3073983c6d)
-
-내 프로필
+  <figure class="thrid"> 
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/76d43518-feb9-4de8-be4c-8199ee1539df width="30%" height="30%"></a> 
+    <figcaption>내 프로필</figcaption></figure>
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/81b8e9c6-2425-4fdc-989a-eb74ddfabd33 width="30%" height="30%"></a> 
+  <figcaption>내 프로필 관리</figcaption></figure>
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/5a108839-3009-438e-9f13-bc3073983c6d width="30%" height="30%"></a> 
+  <figcaption>내 프로필 수정</figcaption></figure>
 
 **내 프로필 관련 화면**
 
-![수입](https://github.com/HyunRe/VentureSupport/assets/130357067/f15c6d50-f5b4-474d-8a41-c33bea7c1b6e)
-
-수입 통계
-
-![지출](https://github.com/HyunRe/VentureSupport/assets/130357067/9664b11b-c31b-4278-9b45-ac9bb71aab3d)
-
-지출 통계
-
-![매출](https://github.com/HyunRe/VentureSupport/assets/130357067/605dc364-2c56-4bce-aca1-acd736a6d51b)
-
-매출 통계
+<figure class="thrid"> 
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/f15c6d50-f5b4-474d-8a41-c33bea7c1b6e width="30%" height="30%"></a> 
+  <figcaption></figcaption>수입 통계</figure>
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/9664b11b-c31b-4278-9b45-ac9bb71aab3d width="30%" height="30%"></a> 
+  <figcaption></figcaption>지출 통계</figure>
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/605dc364-2c56-4bce-aca1-acd736a6d51b width="30%" height="30%"></a> 
+  <figcaption></figcaption>매출 통계계</figure>
 
 **통계 관련 화면**
 
-![네이버 페이1](https://github.com/HyunRe/VentureSupport/assets/130357067/445edad1-8672-466c-980c-4d128e82c55a)
-
-네이버 페이
-
-![네이버 페이 결제](https://github.com/HyunRe/VentureSupport/assets/130357067/705f4e29-d7f6-4d6e-bbab-e48154aca34e)
-
-네이버 페이 결제
+<figure class="half"> 
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/445edad1-8672-466c-980c-4d128e82c55a width="33%" height="33%"></a> 
+  <figcaption>네이버 페이</figcaption></figure>
+<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/705f4e29-d7f6-4d6e-bbab-e48154aca34e width="33%" height="33%"></a> 
+<figcaption>네이버 페이 결제</figcaption></figure>
 
 **네이버 페이 관련 화면**
 
