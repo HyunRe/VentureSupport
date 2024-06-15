@@ -5,6 +5,7 @@
 1.1 **프로젝트 정의**
 
   본 프로젝트를 통해 제안하고자 하는 [Venture Support]은 유통업자를 위한 운송 스케줄 정보를 제공하는 애플리케이션이다. 이를 위해 네이버 지도 API(Application Programming Interface)를 이용한 특정 지역의 지도 정보와 운송 동선에 맞게 설계된 운송 스케줄러, 네이버 페이 API(Application Programming Interface)를 이용한 수입/지출 통계를 기반으로 유통업자에게 물류 운송을 위한 편의성을 제공하고자 한다.
+  
 
 1.2 **프로젝트 배경**
 
@@ -16,6 +17,7 @@
 
   유통업자들에게 네이버 지도 API(Application Programming Interface)를 이용한 지도와 운송 동선에 맞게 설계된 운송 스케줄러와 네이버 페이 API(Application Programming Interface)를 이용한 수입과 지출을 보여주는 통계를 기반 앱을 제공함으로써 운송 과정에 있어서 불편함을 줄여줄 수 있을 것이다.
 
+
 1.3 **프로젝트 목표**
 
 가. 운송 동선 최적화 제공
@@ -26,6 +28,8 @@
 
 다. 수입과 지출에 대한 매출 통계자료 제공
   - 네이버 페이 API(Application Programming Interface)를 이용하여 자신의 지출에 대한 데이터 분석을 통해 유통업자에게 자신의 매출을 기반으로 통계자료의 시각화 서비스를 제공할 수 있도록 구현한다.
+
+
 
 ## 2. 프로젝트 개요
 
