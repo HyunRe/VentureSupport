@@ -54,7 +54,7 @@
 <figure class="thrid"> 
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/2169515e-7863-4e46-b5d4-21c79602670f width="30%" height="30%"></a> 
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/ccd97f55-1890-44ec-9988-687549f09f5e width="30%" height="30%"></a> 
-  <figcaption>자체로그인</figcaption></figure>
+  <figcaption>\n자체로그인</figcaption></figure>
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/a0052200-c456-41d2-a516-07a94508fc00 width="30%" height="30%"></a> 
 <figcaption>네이버 연동 로그인</figcaption></figure>
 
