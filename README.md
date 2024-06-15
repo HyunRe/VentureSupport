@@ -54,7 +54,7 @@
 <figure class="thrid"> 
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/2169515e-7863-4e46-b5d4-21c79602670f width="30%" height="30%"></a> 
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/ccd97f55-1890-44ec-9988-687549f09f5e width="30%" height="30%"></a> 
-  <figcaption>\n자체로그인</figcaption></figure>
+  <figcaption>자체 로그인</figcaption></figure>
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/a0052200-c456-41d2-a516-07a94508fc00 width="30%" height="30%"></a> 
 <figcaption>네이버 연동 로그인</figcaption></figure>
 
@@ -73,17 +73,16 @@
 
 - **홈 UI**
 
-![공고된 물류 운송](https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2)
+<figure class="thrid"> 
+  <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2 width="30%" height="30%"></a> 
+<figcaption>공고된 물류 운송 건</figcaption></figure>
 
-공고된 물류 운송 건
+<a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56 width="30%" height="30%"></a> 
+<figcaption>선택한 물류 운송 건</figcaption></figure>
 
-![선택한 물류 운송건](https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56)
+<a href="link"><img src=[https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56](https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae) width="30%" height="30%"></a> 
+<figcaption>선택된 모든 물류 운송 목록</figcaption></figure>
 
-선택한 물류 운송 건
-
-![내물류운송건](https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae)
-
-선택된 모든 물류 운송 목
 
 공고된 운송 건을 보고 선택할 수 있는 홈 화면
 
