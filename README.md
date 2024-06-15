@@ -1,4 +1,6 @@
-# VentureSupport : 유통 자영업자들 전용 물류 운송 스케줄링 앱
+# VentureSupport
+
+유통 자영업자 전용 물류 운송 스케줄링 앱
 
 ## 1. 프로젝트 목적
 
@@ -38,17 +40,36 @@
 2.2. **예상 결과물**
 
 - **이용자 선택 UI**
+ 
+![회원가입](https://github.com/HyunRe/VentureSupport/assets/130357067/e5381773-68d1-4d45-8a2e-57508acd0f1a)
 
-![로그인](https://github.com/HyunRe/VentureSupport/assets/130357067/cff08850-d73e-4491-85ba-67123ff38856)
 
 이용자의 업종을 선택할 수 있는 화면
 
 물류 운송 건을 공고 및 분배하는 업체 이용자와 공고된 운송 건을 선택 및 운반을 담당하는 운송기사로 구분한다.
 
 
+- **다양한 로그인 지원**
+
+![다양한 로그인 지원](https://github.com/HyunRe/VentureSupport/assets/130357067/2169515e-7863-4e46-b5d4-21c79602670f)
+
+
+![로그인](https://github.com/HyunRe/VentureSupport/assets/130357067/ccd97f55-1890-44ec-9988-687549f09f5e)
+
+자체 로그인
+
+![네이버 로그인](https://github.com/HyunRe/VentureSupport/assets/130357067/a0052200-c456-41d2-a516-07a94508fc00)
+
+
+네이버 연동 로그인
+
+로그인 후 이용자 업종에 최적화된 서로 다른 기능을 지원한다.
+
+
 - **물류 운송 내역 작성 UI**
 
-![image](https://github.com/HyunRe/VentureSupport/assets/130357067/a5a14de2-9a4e-4b3e-a101-524059b0ad84)
+![운송내역작성](https://github.com/HyunRe/VentureSupport/assets/130357067/ffe8a669-1700-41b6-8920-3c15a07f2f03)
+
 
 업체 이용자가 물류 운송 내역을 작성할 수 있는 화면
 
@@ -57,27 +78,42 @@
 
 - **홈 UI**
 
-![image](https://github.com/HyunRe/VentureSupport/assets/130357067/750c66ed-b2c2-4998-9930-deb407a4e6ad)
+![공고된 물류 운송](https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2)
 
-![image](https://github.com/HyunRe/VentureSupport/assets/130357067/a8f880a9-b268-42c0-9497-7c15e6a86f52)
+공고된 물류 운송 건
+
+![선택한 물류 운송건](https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56)
+
+선택한 물류 운송 건
+
+![내물류운송건](https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae)
+
+선택된 모든 물류 운송 목
 
 공고된 운송 건을 보고 선택할 수 있는 홈 화면
 
-업체 이용자가 작성한 물류 운송 건 목록이 나열되어 있다. 물류 운송 건 선택하면 세부적인 내용을 볼 수 있다. 운송기사는 자신이 원하는 물류 운송 건을 선택할 수 있으며, 반드시 2개 이상을 선택해야 한다.
+업체 이용자가 작성한 물류 운송 건 목록이 나열되어 있다. 물류 운송 건을 선택하면 세부적인 내용을 볼 수 있다. 운송기사는 자신이 원하는 물류 운송 건을 선택할 수 있으며, 반드시 2개 이상을 선택해야 한다.
 
 
 - **지도 UI**
 
+![내 창고 위치](https://github.com/HyunRe/VentureSupport/assets/130357067/0c5f7858-fd08-4310-b3e9-ab4119b0b87e)
 
+창고 위치
 
-운송 동선을 계획할 수 있는 지도 화면
+![지도](https://github.com/HyunRe/VentureSupport/assets/130357067/c67826dd-c06c-44cb-a86e-b8b5d514857f)
+
+운송기사가 운송 동선을 계획할 수 있는 지도 화면
 
 네이버 지도 API(Application Programming Interface)를 통해 선택한 물류 운송 건에 있는 거래처 위치와 창고 위치가 지도에 표시된다. 운송 기사는 거래처나 창고를 클릭하면 현재 위치에서 해당 거래처 또는 창고 위치까지의 운송 동선을 구성할 수 있다. 차량 재고 현황과 새 물류 운송 건 공고의 추가에 따라 새롭게 운송 동선을 다시 구성할 수 있다.
 
 
 - **스케줄러 UI**
 
-계획된 운송 동선에 따라 보여지는 스케줄러 화면
+![스케줄러](https://github.com/HyunRe/VentureSupport/assets/130357067/aec60ac0-48f1-438b-a230-901af99590bf)
+
+
+운송기사가 계획한한 운송 동선에 따라 보여지는 스케줄러 화면
 
 운송기사가 지도 UI에서 구성한 동선에 따라 스케줄러 화면에 창고와 현재 운송해야 하는 거래처의 정보와 상품 정보, 수량, 시간이 차례대로 나타나게 된다. 완료된 거래처는 ‘운송 완료’ 버튼으로 삭제할 수 있으며, 새 물류 운송 건이 추가되면 동선에 맞게 스케줄러가 초기화된다. 차량 재고 현황을 통해 동선을 수정해도 된다.
 
@@ -85,16 +121,47 @@
 
 - **내 정보 UI**
 
-![image](https://github.com/HyunRe/VentureSupport/assets/130357067/5fdab748-b2a2-425f-9b34-5895b81786b6)
+![내프로필](https://github.com/HyunRe/VentureSupport/assets/130357067/76d43518-feb9-4de8-be4c-8199ee1539df)
 
-![image](https://github.com/HyunRe/VentureSupport/assets/130357067/d3c6c9d6-bfe6-4467-add4-b6d1dd850a3a)
+내 프로필
 
-![image](https://github.com/HyunRe/VentureSupport/assets/130357067/3b09f9ba-6af7-4721-856e-db43955ad0a7)
+![프로필 관리](https://github.com/HyunRe/VentureSupport/assets/130357067/81b8e9c6-2425-4fdc-989a-eb74ddfabd33)
 
+내 프로필 관리
 
-자신의 매출을 기반으로 통계자료를 보여주는 내 정보 화면
+![프로필 수정](https://github.com/HyunRe/VentureSupport/assets/130357067/5a108839-3009-438e-9f13-bc3073983c6d)
 
-네이버 페이 API(Application Programming Interface)와 연동하여 물류 운송 내역으로 받은 수입과 운송 중 발생한 지출 내역을 통해 일일 매출과 월간 매출을 보여준다. 월간 지출 내역을 보여준다.
+내 프로필
+
+**내 프로필 관련 화면**
+
+![수입](https://github.com/HyunRe/VentureSupport/assets/130357067/f15c6d50-f5b4-474d-8a41-c33bea7c1b6e)
+
+수입 통계
+
+![지출](https://github.com/HyunRe/VentureSupport/assets/130357067/9664b11b-c31b-4278-9b45-ac9bb71aab3d)
+
+지출 통계
+
+![매출](https://github.com/HyunRe/VentureSupport/assets/130357067/605dc364-2c56-4bce-aca1-acd736a6d51b)
+
+매출 통계
+
+**통계 관련 화면**
+
+![네이버 페이1](https://github.com/HyunRe/VentureSupport/assets/130357067/445edad1-8672-466c-980c-4d128e82c55a)
+
+네이버 페이
+
+![네이버 페이 결제](https://github.com/HyunRe/VentureSupport/assets/130357067/705f4e29-d7f6-4d6e-bbab-e48154aca34e)
+
+네이버 페이 결제
+
+**네이버 페이 관련 화면**
+
+운송기사의 매출을 기반으로 통계자료를 보여주는 내 정보 화면
+
+네이버 페이 API(Application Programming Interface)와 연동하여 물류 운송 내역으로 받은 수입과 운송 중 발생한 지출 내역을 통해 일일 매출과 월간 매출을 보여준다. 네이버 페이 결제 시스템과 연동해, 해당 결제 수단(PG)에 대한 월간 지출 내역을 보여준다.
 
 
 
