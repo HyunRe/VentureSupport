@@ -50,41 +50,42 @@ import java.util.Date
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var btn: Button
-    lateinit var btnLogout : Button
-    lateinit var btnPayment : Button
-    lateinit var paymentButton : Button
-    
-    lateinit var payIpayButton : Button
-    lateinit var certificationBtn : Button
-    lateinit var spinner : Spinner
-    lateinit var pgSpinner: Spinner
-    lateinit var pgMethod : Spinner
-    lateinit var name : EditText
-    lateinit var amount : EditText
-    lateinit var cardDirectCode : EditText
+    // UI 요소 선언
+    lateinit var btn: Button // 데이터를 전송하는 버튼
+    lateinit var btnLogout : Button // 로그아웃 버튼
+    lateinit var btnPayment : Button // 결제 버튼
+    lateinit var paymentButton : Button // 다른 결제 버튼
 
+    lateinit var payIpayButton : Button // Ipay 결제 버튼
+    lateinit var certificationBtn : Button // 인증 버튼
+    lateinit var spinner : Spinner // 사용자 코드 선택 스피너
+    lateinit var pgSpinner: Spinner // PG 선택 스피너
+    lateinit var pgMethod : Spinner // 결제 방법 선택 스피너
+    lateinit var name : EditText // 결제자 이름 입력 필드
+    lateinit var amount : EditText // 결제 금액 입력 필드
+    lateinit var cardDirectCode : EditText // 카드 코드 입력 필드
 
-    private val viewModel: ViewModel by viewModels()
+    private val viewModel: ViewModel by viewModels() // ViewModel 인스턴스
+    private val receiver = MerchantReceiver() // 포그라운드 서비스 리시버: MerchantReceiver 인스턴스
+    lateinit var accessToken: String // 네이버 로그인 액세스 토큰
 
-    private val receiver = MerchantReceiver()
-    
-    lateinit var accessToken: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
+        // 시스템 바 영역 패딩 설정
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        initAction()
-        Iamport.init(this)
-        
-        loginuser()
-        getAlluserInfo()
-
+        // 초기 설정 및 액션 초기화
+        initAction()// UI 요소 초기화
+        Iamport.init(this) // Iamport SDK 초기화
+        // 사용자 로그인 및 정보 가져오기
+        loginuser()// 사용자 로그인
+        getAlluserInfo() // 모든 사용자 정보 조회
+        // 포그라운드 서비스 리시버 등록
         registForegroundServiceReceiver(this)
 
         
@@ -92,92 +93,104 @@ class HomeActivity : AppCompatActivity() {
     }
     
     private fun initAction(){
-        btn = findViewById(R.id.btnsenddata)
-        paymentButton = findViewById(R.id.paybutton)
-        btnLogout = findViewById(R.id.logout)
+        // 뷰 요소 초기화
+        btn = findViewById(R.id.btnsenddata) // 사용자 정보 전송 버튼
+        paymentButton = findViewById(R.id.paybutton) // 결제 버튼
+        btnLogout = findViewById(R.id.logout) // 로그아웃 버튼
+        payIpayButton = findViewById(R.id.payment_button) // 결제 아이페이 버튼
+        certificationBtn = findViewById(R.id.certification_button) // 인증 버튼
+        spinner = findViewById(R.id.user_code) // 사용자 코드 스피너
+        pgSpinner = findViewById(R.id.pg) // PG 스피너
+        pgMethod = findViewById(R.id.pg_method) // 결제 방법 스피너
+        name = findViewById(R.id.name) // 이름 입력 필드
+        amount = findViewById(R.id.amount) // 금액 입력 필드
+        cardDirectCode = findViewById(R.id.card_direct_code) // 카드 직결 코드 입력 필드
 
-        payIpayButton = findViewById(R.id.payment_button)
-        certificationBtn = findViewById(R.id.certification_button)
-        spinner = findViewById(R.id.user_code)
-        pgSpinner = findViewById(R.id.pg)
-        pgMethod = findViewById(R.id.pg_method)
-        name = findViewById(R.id.name)
-        amount = findViewById(R.id.amount)
-        cardDirectCode = findViewById(R.id.card_direct_code)
-
+        // 결제 버튼 클릭 리스너
         payIpayButton.setOnClickListener {
             onClickPayment()
         }
 
+        // 인증 버튼 클릭 리스너
         certificationBtn.setOnClickListener {
             onClickCertification()
         }
 
+        // 사용자 코드 스피너 어댑터 설정
         val userCodeAdapter = ArrayAdapter(
             this, android.R.layout.simple_spinner_dropdown_item,
-            Util.getUserCodeList()
+            Util.getUserCodeList()// 사용자 코드 리스트 가져오기
         )
 
+        // PG 스피너 어댑터 설정
         val pgAdapter = ArrayAdapter(
             this, android.R.layout.simple_spinner_dropdown_item,
-            PG.getPGNames()
+            PG.getPGNames() // PG 이름 리스트 가져오기
         )
 
         spinner.adapter = userCodeAdapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                viewModel.userCode = Util.getUserCode(spinner.selectedItemPosition)
+                viewModel.userCode = Util.getUserCode(spinner.selectedItemPosition) // 선택된 사용자 코드 설정
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                // 아무것도 선택되지 않았을 때
             }
 
         }
 
         pgSpinner.adapter = pgAdapter
-        pgSpinner.onItemSelectedListener = pgSelectListener
+        pgSpinner.onItemSelectedListener = pgSelectListener // PG 선택 리스너 설정
 
+        // 이름 입력 필드 텍스트 변경 리스너
         name.doAfterTextChanged {
-            viewModel.paymentName = it.toString()
-            println(it.toString())
+            viewModel.paymentName = it.toString() // 결제 이름 설정
         }
-        name.setText("test payment")
+        name.setText("test payment") // 기본값 설정
+
+        // 금액 입력 필드 텍스트 변경 리스너
         amount.doAfterTextChanged {
-            viewModel.amount = it.toString()
+            viewModel.amount = it.toString() // 결제 금액 설정
         }
-       amount.setText("1000")
+        amount.setText("1000") // 기본값 설정
 
+        // 카드 직결 코드 입력 필드 텍스트 변경 리스너
         cardDirectCode.doAfterTextChanged {
-            viewModel.cardDirectCode = it.toString()
+            viewModel.cardDirectCode = it.toString() // 카드 직결 코드 설정
         }
 
+        // 로그아웃 버튼 클릭 리스너
         btnLogout.setOnClickListener {
-            NaverIdLoginSDK.logout()
+            NaverIdLoginSDK.logout() // 네이버 로그아웃
         }
+        // 사용자 정보 가져오기 / 새로운 사용자 생성 버튼 클릭 리스너
         btn.setOnClickListener {
             getUserInfo(accessToken){
-                createnewuser(it!!)
+                createnewuser(it!!) // 새로운 사용자 생성
             }
         }
     }
 
     override fun onStart() {
+        // 결제 결과 콜백 리스너 설정
         viewModel.resultCallback.observe(this, EventObserver {
-            startActivity(Intent(this@HomeActivity,PaymentResultActivity::class.java))
+            startActivity(Intent(this@HomeActivity, PaymentResultActivity::class.java)) // 결제 결과 화면으로 이동
         })
 
         super.onStart()
     }
 
+    // 결제 요청을 처리하는 메서드
     private fun onClickPayment() {
         val userCode = viewModel.userCode
-        val request = viewModel.createIamPortRequest()
+        val request = viewModel.createIamPortRequest()// 결제 요청 생성
         println(request)
 
-        Iamport.payment(userCode, iamPortRequest = request) { callBackListener.result(it) }
+        Iamport.payment(userCode, iamPortRequest = request) { callBackListener.result(it) } //결제 처리
     }
 
+    // 웹뷰 모드 결제 요청을 처리하는 메서드
     private fun onClickWebViewModePayment() {
         val userCode = viewModel.userCode
         val request = viewModel.createIamPortRequest()
@@ -185,19 +198,21 @@ class HomeActivity : AppCompatActivity() {
         Log.i("SAMPLE", GsonBuilder().setPrettyPrinting().create().toJson(request))
 
         Iamport.close()
-        startActivity(Intent(this,WebViewModeActivity::class.java))
+        startActivity(Intent(this, WebViewModeActivity::class.java)) // 웹뷰 모드 결제 화면으로 이동
     }
 
+    // 모바일 웹 모드 결제 요청을 처리하는 메서드
     private fun onClickMobileWebModePayment() {
         Iamport.close()
-        startActivity(Intent(this,MobileWebViewModeActivity::class.java))
+        startActivity(Intent(this,MobileWebViewModeActivity::class.java)) // 모바일 웹 모드 결제 화면으로 이동
     }
 
+    // 인증 요청을 처리하는 메서드
     fun onClickCertification() {
         val userCode = "iamport"
         val certification = IamPortCertification(
-            merchant_uid = getRandomMerchantUid(),
-            company = "유어포트",
+            merchant_uid = getRandomMerchantUid(), // 랜덤한 머천트 UID 생성
+            company = "유어포트", // 회사명 설정
         )
 
         Iamport.certification(userCode, iamPortCertification = certification) { callBackListener.result(it) }
@@ -222,7 +237,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
+    // 결제 결과 콜백 리스너
     private val callBackListener = object : ICallbackPaymentResult {
         override fun result(iamPortResponse: IamPortResponse?) {
             val resJson = GsonBuilder().setPrettyPrinting().create().toJson(iamPortResponse)
@@ -231,34 +246,35 @@ class HomeActivity : AppCompatActivity() {
             result66 = iamPortResponse
             if (iamPortResponse != null) {
                 startActivity(Intent(this@HomeActivity,PaymentResultActivity::class.java))
+                // 결제 결과 화면으로 이동
                 viewModel.resultCallback.postValue(Event(iamPortResponse))
             }
         }
     }
-
+    // PG 선택 리스너
     private val pgSelectListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            viewModel.pg = PG.values()[position]
+            viewModel.pg = PG.values()[position] // 선택된 PG 설정
             pgMethod.adapter = ArrayAdapter(
                 this@HomeActivity, android.R.layout.simple_spinner_dropdown_item,
                 Util.convertPayMethodNames(PG.values()[position])
-            )
+            ) // PG에 따른 결제 방법 설정
 
             pgMethod.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     viewModel.payMethod = Util.getMappingPayMethod(viewModel.pg).elementAt(pgMethod.selectedItemPosition)
-                }
+                } // 선택된 결제 방법 설정
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+                override fun onNothingSelected(parent: AdapterView<*>?) { // 아무것도 선택되지 않았을 때
                 }
             }
         }
 
-        override fun onNothingSelected(parent: AdapterView<*>?) {
+        override fun onNothingSelected(parent: AdapterView<*>?) { // 아무것도 선택되지 않았을 때
         }
     }
 
-
+    // 네이버 로그인 액세스 토큰으로 사용자 정보를 조회하는 메서드
     private fun getUserInfo(accessToken: String?, callback: (User?) -> Unit) {
         val apiUrl = "https://openapi.naver.com/v1/nid/me"
         val requestQueue: RequestQueue = Volley.newRequestQueue(this)
@@ -293,7 +309,7 @@ class HomeActivity : AppCompatActivity() {
         ) {
             override fun getHeaders(): Map<String, String> {
                 val headers = HashMap<String, String>()
-                headers["Authorization"] = "Bearer $accessToken"
+                headers["Authorization"] = "Bearer $accessToken" // 액세스 토큰 헤더 설정
                 return headers
             }
         }
@@ -301,6 +317,7 @@ class HomeActivity : AppCompatActivity() {
         requestQueue.add(stringRequest)
     }
 
+    //유저 정보 갱신
     private fun updateUser(id : Int,user: User) {
         val call = ApiClient.apiService.updateUser(id, user)
         call.enqueue(object : Callback<User> {
@@ -318,6 +335,7 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
+    // 새로운 사용자를 생성하는 메서드
     private fun createnewuser(user: User){
         val createUser = ApiClient.apiService.createUser(user)
         createUser.enqueue(object : Callback<User>{
@@ -334,7 +352,7 @@ class HomeActivity : AppCompatActivity() {
 
         })
     }
-    
+    // 사용자 로그인을 처리하는 메서드
     private fun loginuser(){
         val user = User(id = null, username = "hiendzvcl1", email = "hiendz1@example.com",lat = 9999.9999,lng = 999999.99, phone = "666" , password = "666", inventoryQuantity = "100")
 
@@ -351,7 +369,8 @@ class HomeActivity : AppCompatActivity() {
 
         })
     }
-    
+
+    // 모든 사용자 정보를 조회하는 메서드
     private fun getAlluserInfo(){
         //get user info from naver login
         accessToken = NaverIdLoginSDK.getAccessToken().toString()
@@ -375,6 +394,7 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
+    // 랜덤한 머천트 UID를 생성하는 메서드
     private fun getRandomMerchantUid(): String {
         return "muid_aos_${Date().time}"
     }

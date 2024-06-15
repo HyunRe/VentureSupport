@@ -9,6 +9,7 @@ object ApiClient {
 
     private const val BASE_URL = "http://100.26.31.51:8080"
 
+    //리트로핏 명령줄 사용 함수
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -17,6 +18,7 @@ object ApiClient {
             .build()
     }
 
+    //api 관련 정보 관리 함수
     val apiService: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }

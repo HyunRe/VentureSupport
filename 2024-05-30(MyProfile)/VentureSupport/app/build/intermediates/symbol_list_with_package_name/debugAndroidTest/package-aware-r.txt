@@ -1,3 +1,0 @@
-com.example.venturesupport.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

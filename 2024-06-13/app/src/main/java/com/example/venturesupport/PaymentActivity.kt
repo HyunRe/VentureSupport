@@ -66,6 +66,7 @@ class PaymentActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val payments = response.body()
                     if (!payments.isNullOrEmpty()) {
+                        //기존 결제정보들을 payments[] 리스트에 넣어 출력
                         val payment = payments[0]
                         // 결제 정보를 화면에 표시합니다.
 

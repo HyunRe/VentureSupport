@@ -15,11 +15,15 @@ import java.sql.Date
  * 주문 수정 화면을 위한 액티비티 클래스입니다.
  */
 class EditOrderActivity : AppCompatActivity() {
-    // 바인딩 변수: 레이아웃과 연결하여 UI 요소에 접근할 수 있도록 합니다.
+
     private val binding: EditorderBinding by lazy {
         EditorderBinding.inflate(layoutInflater)
     }
+
+    // 수정할 주문 객체를 저장할 변수
     private var editOrder: Order? = null
+
+    // 텍스트 뷰에 바인딩할 문자열 변수들
     private lateinit var date: String
     private lateinit var supplier_Name: String
     private lateinit var supplier_PhoneNumber: String
@@ -38,7 +42,8 @@ class EditOrderActivity : AppCompatActivity() {
         @Suppress("DEPRECATION")
         editOrder = intent.getParcelableExtra("editOrder")
 
-        // 기존 주문 정보로 뷰를 초기화합니다.
+        // 기존 주문 정보를 바인딩된 뷰에 설정합니다.
+        // 날짜, 공급자 이름, 전화번호, 위치, 급여, 총 금액을 설정합니다.
         binding.dateTextView.setText(editOrder?.date.toString(), TextView.BufferType.EDITABLE)
         binding.SupplierNameTextView.setText(editOrder?.supplier?.supplierName, TextView.BufferType.EDITABLE)
         binding.SupplierPhoneNumberTextView.setText(editOrder?.supplier?.supplierPhoneNumber, TextView.BufferType.EDITABLE)
@@ -50,34 +55,34 @@ class EditOrderActivity : AppCompatActivity() {
         binding.updateButton.setOnClickListener {
             // 입력된 값을 가져와서 변수에 저장합니다.
             date = if (binding.date.text.isNullOrEmpty()) {
-                editOrder?.date.toString()
+                editOrder?.date.toString() // 날짜가 비어있으면 기존 값을 사용합니다.
             } else {
-                binding.date.text.toString()
+                binding.date.text.toString() // 날짜 입력이 있으면 입력된 값을 사용합니다.
             }
             supplier_Name = if (binding.SupplierName.text.isNullOrEmpty()) {
-                editOrder?.supplier?.supplierName.toString()
+                editOrder?.supplier?.supplierName.toString() // 이름이 비어있으면 기존 값을 사용합니다.
             } else {
-                binding.SupplierName.text.toString()
+                binding.SupplierName.text.toString() // 이름 입력이 있으면 입력된 값을 사용합니다.
             }
             supplier_PhoneNumber = if (binding.SupplierPhoneNumber.text.isNullOrEmpty()) {
-                editOrder?.supplier?.supplierPhoneNumber.toString()
+                editOrder?.supplier?.supplierPhoneNumber.toString() // 전화번호가 비어있으면 기존 값을 사용합니다.
             } else {
-                binding.SupplierPhoneNumber.text.toString()
+                binding.SupplierPhoneNumber.text.toString() // 전화번호 입력이 있으면 입력된 값을 사용합니다.
             }
             supplier_Location = if (binding.SupplierLocation.text.isNullOrEmpty()) {
-                editOrder?.supplier?.supplierLocation.toString()
+                editOrder?.supplier?.supplierLocation.toString() // 위치가 비어있으면 기존 값을 사용합니다.
             } else {
-                binding.SupplierLocation.text.toString()
+                binding.SupplierLocation.text.toString() // 위치 입력이 있으면 입력된 값을 사용합니다.
             }
             salary = if (binding.Salary.text.isNullOrEmpty()) {
-                editOrder?.salary.toString()
+                editOrder?.salary.toString() // 급여가 비어있으면 기존 값을 사용합니다.
             } else {
-                binding.Salary.text.toString()
+                binding.Salary.text.toString() // 급여 입력이 있으면 입력된 값을 사용합니다.
             }
             totalAmount = if (binding.TotalAmount.text.isNullOrEmpty()) {
-                editOrder?.totalAmount.toString()
+                editOrder?.totalAmount.toString() // 총 금액이 비어있으면 기존 값을 사용합니다.
             } else {
-                binding.TotalAmount.text.toString()
+                binding.TotalAmount.text.toString() // 총 금액 입력이 있으면 입력된 값을 사용합니다.
             }
 
             // 새로 수정된 주문 객체를 생성합니다.
@@ -94,7 +99,7 @@ class EditOrderActivity : AppCompatActivity() {
                 supplier = supplier,
                 company = editOrder?.company!!,
                 user = editOrder?.user!!,
-                date = Date(date.toLong()),
+                date = Date(date.toLong()), // Unix timestamp를 Date 객체로 변환
                 salary = salary.toDouble(),
                 totalAmount = totalAmount.toInt()
             )

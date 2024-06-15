@@ -19,7 +19,7 @@ interface WarehouseApi {
     fun createWarehouse(@Body warehouse: Warehouse): Call<Warehouse>
 
     /**
-     * 특정 사용자의 창고 목록을 가져오는 API 요청을 정의합니다.
+     * 특정 사용자의 userID로 창고 목록을 가져오는 API 요청을 정의합니다.
      * @param id Int - 사용자 ID
      * @return Call<List<Warehouse>> - API 호출 결과를 담은 Call 객체
      */

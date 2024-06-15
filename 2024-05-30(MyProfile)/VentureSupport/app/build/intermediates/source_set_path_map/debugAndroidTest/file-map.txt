@@ -1,6 +1,0 @@
-com.example.venturesupport.test.app-core-1.5.0-0 C:\Users\ljcho\.gradle\caches\transforms-3\4b1f0787700ccd7ac6c94a26acbfa747\transformed\core-1.5.0\res
-com.example.venturesupport.test.app-annotation-experimental-1.4.1-1 C:\Users\ljcho\.gradle\caches\transforms-3\7c1d3c2fd29fff19004090b8937a424d\transformed\annotation-experimental-1.4.1\res
-com.example.venturesupport.test.app-androidTest-2 C:\Users\ljcho\Documents\GitHub\VentureSupport\2024-05-30(MyProfile)\VentureSupport\app\build\generated\res\resValues\androidTest\debug
-com.example.venturesupport.test.app-mergeDebugAndroidTestResources-3 C:\Users\ljcho\Documents\GitHub\VentureSupport\2024-05-30(MyProfile)\VentureSupport\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.venturesupport.test.app-mergeDebugAndroidTestResources-4 C:\Users\ljcho\Documents\GitHub\VentureSupport\2024-05-30(MyProfile)\VentureSupport\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.venturesupport.test.app-merged_res-5 C:\Users\ljcho\Documents\GitHub\VentureSupport\2024-05-30(MyProfile)\VentureSupport\app\build\intermediates\merged_res\debugAndroidTest

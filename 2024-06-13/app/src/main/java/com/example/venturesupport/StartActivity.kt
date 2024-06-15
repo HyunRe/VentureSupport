@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.venturesupport.databinding.StartBinding
-//첫 화면
+//로딩용 첫 화면
 class StartActivity: AppCompatActivity() {
     private val binding: StartBinding by lazy {
         StartBinding.inflate(layoutInflater)

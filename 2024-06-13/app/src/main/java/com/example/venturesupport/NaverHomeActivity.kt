@@ -24,6 +24,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Lifecycle
+import androidx.media3.common.util.Util
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -63,17 +64,21 @@ import com.iamport.sdk.domain.utils.Util
 
 class NaverHomeActivity : AppCompatActivity() {
 
-    lateinit var btn: Button
-    lateinit var btnLogout: Button
-    lateinit var paymentButton: Button
-    lateinit var payIpayButton: Button
-    lateinit var certificationBtn: Button
-    lateinit var spinner: Spinner
-    lateinit var pgSpinner: Spinner
-    lateinit var pgMethod: Spinner
-    lateinit var name: EditText
-    lateinit var amount: EditText
-    lateinit var cardDirectCode: EditText
+    // UI 요소 선언
+    lateinit var btn: Button // 데이터를 전송하는 버튼
+    lateinit var btnLogout : Button // 로그아웃 버튼
+    lateinit var btnPayment : Button // 결제 버튼
+    lateinit var paymentButton : Button // 다른 결제 버튼
+
+    lateinit var payIpayButton : Button // Ipay 결제 버튼
+    lateinit var certificationBtn : Button // 인증 버튼
+    lateinit var spinner : Spinner // 사용자 코드 선택 스피너
+    lateinit var pgSpinner: Spinner // PG 선택 스피너
+    lateinit var pgMethod : Spinner // 결제 방법 선택 스피너
+    lateinit var name : EditText // 결제자 이름 입력 필드
+    lateinit var amount : EditText // 결제 금액 입력 필드
+    lateinit var cardDirectCode : EditText // 카드 코드 입력 필드
+
 
     // ViewModel 인스턴스
     private val viewModel: ViewModel by viewModels()
@@ -96,12 +101,12 @@ class NaverHomeActivity : AppCompatActivity() {
         }
 
         // 초기 설정 및 액션 초기화
-        initAction()
-        Iamport.init(this)
+        initAction() // UI 요소 초기화
+        Iamport.init(this) // Iamport SDK 초기화
 
         // 사용자 로그인 및 정보 가져오기
-        loginUser()
-        getAllUserInfo()
+        loginUser() // 사용자 로그인
+        getAllUserInfo() // 모든 사용자 정보 조회
 
         // 포그라운드 서비스 리시버 등록
         registerForegroundServiceReceiver(this)
@@ -189,17 +194,20 @@ class NaverHomeActivity : AppCompatActivity() {
         // 결제 결과 콜백 리스너 설정
         viewModel.resultCallback.observe(this, EventObserver {
             startActivity(Intent(this@NaverHomeActivity, PaymentResultActivity::class.java))
-        })
+        }) // 결제 결과 화면으로 이동
         super.onStart()
     }
 
+    // 결제 요청을 처리하는 메서드
     private fun onClickPayment() {
         val userCode = viewModel.userCode
         val request = viewModel.createIamPortRequest() // 결제 요청 생성
 
         Iamport.payment(userCode, iamPortRequest = request) { callBackListener.result(it) }
+        //결제 처리
     }
 
+    // 웹뷰 모드 결제 요청을 처리하는 메서드
     private fun onClickCertification() {
         val userCode = "iamport"
         val certification = IamPortCertification(

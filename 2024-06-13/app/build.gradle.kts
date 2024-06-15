@@ -66,6 +66,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation(libs.billing)
+    implementation(libs.androidx.media3.common)
     runtimeOnly ("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5")
     implementation("kr.iamport:iamport-android:0.9.5")
     implementation (libs.iamport.android)

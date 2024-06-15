@@ -5,10 +5,10 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Product(
-    @SerializedName("productId") val productId: Int?,
-    @SerializedName("productName") val productName: String?,
-    @SerializedName("productPrice") val productPrice: Double?,
-    @SerializedName("productQuantity") val productQuantity: String? // String 타입으로 변경
+    @SerializedName("productId") val productId: Int?, //상품 일련번호
+    @SerializedName("productName") val productName: String?, //상품명
+    @SerializedName("productPrice") val productPrice: Double?, //가격
+    @SerializedName("productQuantity") val productQuantity: String? //개수:  String 타입으로 변경
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,

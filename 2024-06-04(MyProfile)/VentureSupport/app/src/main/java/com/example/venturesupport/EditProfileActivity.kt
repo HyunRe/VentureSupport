@@ -25,11 +25,13 @@ class EditProfileActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root) // 액티비티의 뷰를 설정
 
-        // 사용자 정보를 인텐트에서 가져옴 (이전 API 사용으로 경고 억제)
+        // 사용자 정보를 인텐트에서 가져옴 (@Supress는 이전 API 사용으로 경고 억제)
         @Suppress("DEPRECATION")
         user = intent.getParcelableExtra("user")
 
-        // 바인딩된 UI 요소에 사용자 정보 설정
+        /* 바인딩된 UI 요소(각각 userEmail, userId, userName, userPhoneNumber EditText)에
+        사용자 정보 입력받아 이후 프로필 편집 진행하도록 설정
+         */
         binding.userEmail.text = user?.email
         binding.userId.text = user?.userId.toString()
         binding.userName.text = user?.username
@@ -37,15 +39,15 @@ class EditProfileActivity: AppCompatActivity() {
 
         // 수정 버튼 클릭 리스너 설정
         binding.editButton.setOnClickListener {
-            // CheckingUserActivity로 이동하는 인텐트 생성 및 시작
+            // CheckingUserActivity(유저정보 검증)로 이동하는 인텐트 생성 및 시작
             val intent = Intent(this, CheckingUserActivity::class.java)
             intent.putExtra("user", user) // 사용자 정보를 인텐트에 추가
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 새로운 태스크로 액티비티 시작
-            startActivity(intent)
+            startActivity(intent) //로딩 화면으로 StartActivity
             finish() // 현재 액티비티 종료
         }
 
-        // 로그아웃 버튼 클릭 리스너 설정
+        // 로그아웃 버튼 클릭 리스너 설정: 미가입자가 로그인 없이 접근하지 못하도록 초기화면인 LoginActivity로 수정 필
         binding.logoutButton.setOnClickListener {
             // MainActivity로 이동하는 인텐트 생성 및 시작
             val intent = Intent(this, MainActivity::class.java)
