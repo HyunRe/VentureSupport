@@ -75,10 +75,9 @@
 
 <figure class="thrid"> 
   <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/cbb952b4-400b-419c-a249-488a31baa3f2 width="30%" height="30%"></a> 
-<figcaption>공고된 물류 운송 건</figcaption></figure>
 
 <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/6467173d-5bde-4ffe-8979-77feb4483c56 width="30%" height="30%"></a> 
-<figcaption>선택한 물류 운송 건</figcaption></figure>
+<figcaption>공고된 물류 운송 건   선택한 물류 운송 건</figcaption></figure>
 
 <a href="link"><img src=https://github.com/HyunRe/VentureSupport/assets/130357067/a8cc7b91-2737-43e3-a1b0-4344a4b641ae width="30%" height="30%"></a> 
 <figcaption>선택된 모든 물류 운송 목록</figcaption></figure>
